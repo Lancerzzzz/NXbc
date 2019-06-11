@@ -121,7 +121,7 @@ class config_stp():
                 }
         config = configbase(self.serial, payload)
         response = config.send()
-        data = json.loads(response.text)['imdata']
+        data = json.loads(response.text)
         return data
         # if len(data) == 0:
         #     return True
