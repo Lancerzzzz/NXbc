@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+{#    <h1>Device List</h1>#}
+{#<table  border="1"  >#}
+{#    <tr>#}
+{#        <td>id</td>#}
+{#        <td>name</td>#}
+{#        <td>passwd</td>#}
+{#        <td>url</td>#}
+{#        <td>systemUptime</td>#}
+{#        <td>serial</td>#}
+{#        <td>status</td>#}
+{#        <td>dn</td>#}
+{##}
+{#    </tr>#}
+{#    {% for i in delist %}#}
+{#        <tr>#}
+{#        {% for j in i.values %}#}
+{#                <td>{{ j }}</td>#}
+{#        {% endfor %}#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+<h1>test infomation</h1>
+    {{ delist }}
+
+</center>
+</body>
+</html>
