@@ -72,34 +72,9 @@ class config_stp():
         self.l2GStpDomId = l2GStpDomId
         self.loopguard = loopguard
         self.pathcostOp = pathcostOp
-        self.payload = {
-                    "topSystem": {
-                        "children": [
-                            {
-                                "stpEntity": {
-                                    "children": [
-                                        {
-                                            "stpInst": {
-                                                "attributes": {
-                                                    "adminSt": adminSt,
-                                                    "bridge": bridge,
-                                                    "ctrl": ctrl,
-                                                    "fcoe": fcoe,
-                                                    "l2GStpDomId": l2GStpDomId,
-                                                    "loopguard": loopguard,
-                                                    "mode": mode,
-                                                    "pathcostOp": pathcostOp,
-                                                }
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        ]
-                    }
-                }
 
-    def config_stpinst(self):
+
+    def config_stp_mode(self):
         payload = {
                     "topSystem": {
                         "children": [
@@ -127,6 +102,7 @@ class config_stp():
         #     return True
         # else:
         #     return False
+
 
     def config_stpif(self,):
         pass
@@ -213,7 +189,47 @@ class config_stp():
                             }
                         }
 
+        config = configbase(self.serial, payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
 
-    def config_stp_mstdom(self,name):
+    def config_stp_mstdom(self,
+                          cfgSt="1",
+                          diameter="2",
+                          priority="32768",
+                          root="1",
+                          rootMode="0",
+                          rootType="0",
+                          vlanRange="1-4096"
+                          ):
+        """
 
-        pass
+        :param cfgSt:Instance config State
+                        1 - enabled
+                        2 - disabled
+                        DEFAULT: disabled
+        :param diameter:Network Diameter
+                        RANGE: [2 , 7]
+                        DEFAULT: 2
+        :param priority:Bridge Priority
+                        RANGE: [0 , 61440]
+                        DEFAULT: 32768
+        :param root:Root Options
+                        1 - primary
+                        2 - secondary
+                        DEFAULT: primary
+        :param rootMode:Bridge Root Config mode
+                        0 - disabled
+                        1 - enabled
+                        DEFAULT: disabled
+        :param rootType:Bridge Root Type
+                        0 - none
+                        1 - primary
+                        2 - secondary
+                        DEFAULT: none
+        :param vlanRange:Vlan Range Bitmap
+                        DEFAULT: 1-4094
+        :return:
+        """
+

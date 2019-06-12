@@ -14,16 +14,13 @@ def query_oneintru(serial, eth):
     one1.extend(one2)
     one1.extend(one3)
     one1.extend(one4)
-    one = json.dumps(one1)
-    # print(one)
-    # print(type(one))
-    return one
+    return one1
 
 
 # ok show int trunk
 def query_allintru(serial):
     cli = "show int trunk"
-    query = cli_base(serial,cli)
+    query = cli_base(serial, cli)
     response = json.loads(query.send().text)
     allint1 = response['ins_api']['outputs']['output']['body']['TABLE_allowed_vlans']['ROW_allowed_vlans']
     allint2 = response['ins_api']['outputs']['output']['body']['TABLE_vtp_pruning']['ROW_vtp_pruning']
@@ -32,9 +29,7 @@ def query_allintru(serial):
     allint1.extend(allint2)
     allint1.extend(allint3)
     allint1.extend(allint4)
-    allint1 = json.dumps(allint1, indent=2)
-    # print(allint1)
-    # print(type(allint1))
+
     return allint1
 
 
@@ -43,19 +38,15 @@ def query_l3ipif(serial):
     cli = "show ip int b"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
-    # print("11111")
-    allip = json.dumps(response['ins_api']['outputs']['output']['body']['TABLE_intf']['ROW_intf'])
-    # print(allip)
-    # print(type(allip))
+    allip = response['ins_api']['outputs']['output']['body']['TABLE_intf']['ROW_intf']
     return allip
-
 
 # ok show int b
 def query_l2allintif(serial):
     cli = "show int b"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
-    allint = json.dumps(response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface'])
+    allint = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
     return allint
 
 
@@ -64,8 +55,7 @@ def query_l2intif(serial,eth):
     cli = "show int "+eth
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
-    allint = [response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']]
-    allint = json.dumps(allint)
+    allint = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
     return allint
 
 
@@ -74,6 +64,5 @@ def query_l2intbif(serial,eth):
     cli = "show int " + eth + " b"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
-    oneintb = [response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']]
-    oneintb = json.dumps(oneintb)
+    oneintb = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
     return oneintb
