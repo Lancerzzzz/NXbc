@@ -6,7 +6,7 @@
 
 from django import forms
 
-class loginform(forms.Form):
 
+class loginform(forms.Form):
     username = forms.CharField()
-    passwd   = forms.CharField()
+    passwd = forms.CharField()

@@ -7,7 +7,7 @@ from devicemn import devicemn
 from nxapi.cli_base import cli_base
 from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
-from  django.views import  View
+from django.views import View
 from nxapi.config.config_stp import config_stp
 from nxapi.query.query_mac import query_l2allmac
 
@@ -73,7 +73,7 @@ class home(View):
         data = d.get_all_device()
         if name != None and not name.__eq__(""):
             if name == "admin" and pwd == "admin":
-                return render(request, "home.html",{"delist":data})
+                return render(request, "home.html", {"delist": data})
             else:
                 return HttpResponse(u"passwd or username wrong!!!!")
 
@@ -86,7 +86,7 @@ class stp(View):
     def get(self, request):
         a = config_stp("9CNTS3XFTXY", mode="3")
         data = a.config_stpinst()
-        return JsonResponse(data,safe=False)
+        return JsonResponse(data, safe=False)
 
     def post(self, request):
         # serial = str(request.POST["serial"])
@@ -95,11 +95,11 @@ class stp(View):
         mode = "3"
         a = config_stp(serial, mode)
         data = a.config_stpinst()
-        return JsonResponse(data,safe=False)
+        return JsonResponse(data, safe=False)
 
 
 class mac(View):
-    def get(self,request):
+    def get(self, request):
         data = query_l2allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
@@ -110,14 +110,7 @@ class mac(View):
 
 class l3ipif(View):
 
-    def get(self,request):
+    def get(self, request):
         serial = "9CNTS3XFTXY"
         data = query_allintru(serial)
         return JsonResponse(data, safe=False)
-
-
-
-
-
-
-

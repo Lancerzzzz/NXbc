@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -11,4 +12,3 @@ class devicelist(models.Model):
     serial = models.CharField(max_length=50)
     status = models.CharField(max_length=50)
     dn = models.CharField(max_length=30)
-

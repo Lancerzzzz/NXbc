@@ -13,10 +13,10 @@ class Httpsconn():
         self.username = username
         self.password = password
         self.ip_addr = ip_addr
-        self.auth_cookie={}
+        self.auth_cookie = {}
 
     def aaa_login(self):
-        URL = "https://"+self.ip_addr+"/api/aaaLogin.json"
+        URL = "https://" + self.ip_addr + "/api/aaaLogin.json"
         PAYLOAD = {
             "aaaUser": {
                 "attributes": {
@@ -37,7 +37,7 @@ class Httpsconn():
             return None
 
     def aaa_logout(self):
-        URL = "https://"+self.ip_addr+"/api/aaaLogout.json"
+        URL = "https://" + self.ip_addr + "/api/aaaLogout.json"
         payload = {
             'aaaUser': {
                 'attributes': {
@@ -50,13 +50,13 @@ class Httpsconn():
         return response
 
     def json_method(self, payload=None, action="GET"):
-        URL = "https://"+self.ip_addr+"/api/mo/sys.json"
+        URL = "https://" + self.ip_addr + "/api/mo/sys.json"
         session = requests.session()
         response = session.request(action, URL, data=json.dumps(payload), cookies=self.auth_cookie, verify=False)
         return response
 
     def cli_method(self, cli=""):
-        url = 'https://'+self.ip_addr+'/ins'
+        url = 'https://' + self.ip_addr + '/ins'
         payload = {
             "ins_api": {
                 "version": "1.0",
@@ -78,7 +78,6 @@ class Httpsconn():
             return json.dumps(json.loads(re.text), indent=2)
         else:
             return None
-
 
 # a = Httpsconn("admin", "Admin_1234!", "192.168.200.3")
 # response = a.cli_method("show ip int e1/1")
@@ -154,8 +153,3 @@ class Httpsconn():
 # # print(a.json_dump(re))
 # re = a.aaa_logout()
 # print(a.json_dump(re))
-
-
-
-
-

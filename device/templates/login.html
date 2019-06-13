@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
 </head>
-<body>
-<center>
-<h1>Login</h1>
-<form action="/home/" method="post">
+<body style="align-self: center">
+<form action="/home/" method="post" style="margin-left:500px;margin-top:200px;">
     {% csrf_token %}
-    username:<input type="text" name="username">&nbsp;&nbsp;&nbsp;&nbsp;
-    password:<input type="password" name="passwd"><br>
-
-    <input size="20" type="submit" value="login">
-    <input size="20" type="reset"  value="reset"><br>
+    <div class="form-group">
+        <label for="user" stype="display:inline;">username:</label>
+        <input type="text" class="form-control" name="username" id="user" style="display:inline;width:200px;" autocomplete="off"/>
+    </div>
+    <div class="form-group">
+        <label for="password" style="display:inline;"> password:</label>
+       <input type="password"  class="form-control" id="password" name="passwd" style="display:inline;width:200px;" autocomplete="off"/>
+    </div>
+    {% buttons %}
+    <input  class="btn btn-primary" type="submit" value="login">
+    <input  class="btn btn-primary" type="reset"  value="reset"><br>
+    {% endbuttons %}
 </form>
-
-</center>
 </body>
 </html>
