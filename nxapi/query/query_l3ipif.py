@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    :2019-06-13 21:00
+# @Autor   :Zh
+# @File    :query_l3ipif.py
 from nxapi.cli_base.cli_base import cli_base
 import json
 
@@ -28,16 +33,10 @@ def query_allintru(serial):
     allint2 = response['ins_api']['outputs']['output']['body']['TABLE_vtp_pruning']['ROW_vtp_pruning']
     allint3 = response['ins_api']['outputs']['output']['body']['TABLE_stp_forward']['ROW_stp_forward']
     allint4 = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
-    allint1.extend(allint2)
-    allint1.extend(allint3)
-    allint1.extend(allint4)
-    lena = len(allint1)
-    print(lena)
-    for i in lena:
-        for b in allint1:
-            print(type(i))
-        print(i['interface'])
-        # if i['interface']
+    for i in range(0, len(allint1)):
+        allint1[i].update(allint2[i])
+        allint1[i].update(allint3[i])
+        allint1[i].update(allint4[i])
     return allint1
 
 
@@ -48,6 +47,7 @@ def query_l3ipif(serial):
     response = json.loads(query.send().text)
     allip = response['ins_api']['outputs']['output']['body']['TABLE_intf']['ROW_intf']
     return allip
+
 
 # ok show int b
 def query_l2allintif(serial):
