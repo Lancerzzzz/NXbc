@@ -7,14 +7,16 @@ def query_oneintru(serial, eth):
     cli = "show int " + eth + " trunk"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
-    one1 = [response['ins_api']['outputs']['output']['body']['TABLE_allowed_vlans']['ROW_allowed_vlans']]
-    one2 = [response['ins_api']['outputs']['output']['body']['TABLE_vtp_pruning']['ROW_vtp_pruning']]
-    one3 = [response['ins_api']['outputs']['output']['body']['TABLE_stp_forward']['ROW_stp_forward']]
-    one4 = [response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']]
-    one1.extend(one2)
-    one1.extend(one3)
-    one1.extend(one4)
-    return one1
+    one1 = response['ins_api']['outputs']['output']['body']['TABLE_allowed_vlans']['ROW_allowed_vlans']
+    one2 = response['ins_api']['outputs']['output']['body']['TABLE_vtp_pruning']['ROW_vtp_pruning']
+    one3 = response['ins_api']['outputs']['output']['body']['TABLE_stp_forward']['ROW_stp_forward']
+    one4 = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
+    one = {}
+    one.update(one1)
+    one.update(one2)
+    one.update(one3)
+    one.update(one4)
+    return one
 
 
 # ok show int trunk
@@ -29,6 +31,13 @@ def query_allintru(serial):
     allint1.extend(allint2)
     allint1.extend(allint3)
     allint1.extend(allint4)
+    lena = len(allint1)
+    print(lena)
+    for i in lena:
+        for b in allint1:
+            print(type(i))
+        print(i['interface'])
+        # if i['interface']
     return allint1
 
 

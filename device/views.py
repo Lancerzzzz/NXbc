@@ -112,7 +112,7 @@ class l3ipif(View):
 
     def get(self,request):
         serial = "9CNTS3XFTXY"
-        data = query_l3ipif(serial)
+        data = query_allintru(serial)
         return JsonResponse(data, safe=False)
 
 
