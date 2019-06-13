@@ -12,7 +12,7 @@ class Conf_trunk():
                  id ="e1/1",
                  mode = "1",
                  trunkVlans = "1-4094",
-
+                 nativeVlan = "vlan-1"
                  ):
         """
 
@@ -32,11 +32,14 @@ class Conf_trunk():
         DEFAULT: access
         :param trunkVlans:
         DEFAULT: 1-4094
+        :param nativeVlan:
+        SELECTION: unknown, vlan-%d or vxlan-%d DEFAULT: vlan-1
         """
         self.serial = serial
         self.id = id
         self.mode =mode
         self.trunkVlans =trunkVlans
+        self.nativeVlan = nativeVlan
         self.payload = {
             "topSystem": {
                 "children": [
@@ -48,7 +51,8 @@ class Conf_trunk():
                                         "attributes": {
                                             "id": id,
                                             "mode": mode,
-                                            "trunkVlans": trunkVlans
+                                            "trunkVlans": trunkVlans,
+                                            "nativeVlan":nativeVlan
                                         }
                                     }
                                 }
@@ -71,7 +75,8 @@ class Conf_trunk():
                                         "attributes": {
                                             "id": self.id,
                                             "mode": self.mode,
-                                            "trunkVlans": self.trunkVlans
+                                            "trunkVlans": self.trunkVlans,
+                                            "nativeVlan":self.nativeVlan
                                         }
                                     }
                                 }
