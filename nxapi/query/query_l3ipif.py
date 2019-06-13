@@ -29,7 +29,6 @@ def query_allintru(serial):
     allint1.extend(allint2)
     allint1.extend(allint3)
     allint1.extend(allint4)
-
     return allint1
 
 

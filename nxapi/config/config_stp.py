@@ -73,7 +73,6 @@ class config_stp():
         self.loopguard = loopguard
         self.pathcostOp = pathcostOp
 
-
     def config_stp_mode(self):
         payload = {
                     "topSystem": {
@@ -103,9 +102,113 @@ class config_stp():
         # else:
         #     return False
 
+    def config_stp_mst(self, mstname, revision):
+        payload = {
+                  "topSystem": {
+                    "children": [
+                      {
+                        "stpEntity": {
+                          "children": [
+                            {
+                              "stpInst": {
+                                "children": [
+                                  {
+                                    "stpMstEntity": {
+                                      "attributes": {
+                                        "regName": mstname,
+                                        "rev": revision
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+        config = configbase(self.serial, payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
 
-    def config_stpif(self,):
-        pass
+    def config_stp_mst_instance(self, instanceid, vlanrange):
+        payload = {
+                  "topSystem": {
+                    "children": [
+                      {
+                        "stpEntity": {
+                          "children": [
+                            {
+                              "stpInst": {
+                                "children": [
+                                  {
+                                    "stpMstEntity": {
+                                      "children": [
+                                        {
+                                          "stpMstDom": {
+                                            "attributes": {
+                                              "id": instanceid,
+                                              "vlanRange": vlanrange
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+        config = configbase(self.serial, payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
+
+    def config_stp_mst_priority(self, instanceid, priority):
+        payload={
+              "topSystem": {
+                "children": [
+                  {
+                    "stpEntity": {
+                      "children": [
+                        {
+                          "stpInst": {
+                            "children": [
+                              {
+                                "stpMstEntity": {
+                                  "children": [
+                                    {
+                                      "stpMstDom": {
+                                        "attributes": {
+                                          "id": instanceid,
+                                          "priority": priority
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+        config = configbase(self.serial, payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
 
     def config_stp_mstentity(self,
                              adminSt="1",
@@ -188,48 +291,73 @@ class config_stp():
                                 ]
                             }
                         }
-
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
         return data
 
-    def config_stp_mstdom(self,
-                          cfgSt="1",
-                          diameter="2",
-                          priority="32768",
-                          root="1",
-                          rootMode="0",
-                          rootType="0",
-                          vlanRange="1-4096"
-                          ):
+    def config_stp_pvrst(self,
+                         adminSt="1",
+                         diameter="2",
+                         fwdTime="15",
+                         helloTime="2",
+                         vlanid="1",
+                         maxAge="20",
+                         priority="32768",
+                         rootMode="0",
+                         rootType="0"
+                         ):
         """
 
-        :param cfgSt:Instance config State
-                        1 - enabled
-                        2 - disabled
-                        DEFAULT: disabled
-        :param diameter:Network Diameter
-                        RANGE: [2 , 7]
-                        DEFAULT: 2
-        :param priority:Bridge Priority
-                        RANGE: [0 , 61440]
-                        DEFAULT: 32768
-        :param root:Root Options
-                        1 - primary
-                        2 - secondary
-                        DEFAULT: primary
-        :param rootMode:Bridge Root Config mode
-                        0 - disabled
-                        1 - enabled
-                        DEFAULT: disabled
-        :param rootType:Bridge Root Type
-                        0 - none
-                        1 - primary
-                        2 - secondary
-                        DEFAULT: none
-        :param vlanRange:Vlan Range Bitmap
-                        DEFAULT: 1-4094
+        :param adminSt:
+        :param diameter:
+        :param fwdTime:
+        :param helloTime:
+        :param vlanid:
+        :param maxAge:
+        :param priority:
+        :param rootMode:
+        :param rootType:
         :return:
+        https://pubhub.devnetcloud.com/media/nx-dme-ref-922/docs/Discovery%20Protocols/stp:Vlan/
         """
+        payload = {
+                  "topSystem": {
+                    "children": [
+                      {
+                        "stpEntity": {
+                          "children": [
+                            {
+                              "stpInst": {
+                                "children": [
+                                  {
+                                    "stpVlan": {
+                                      "attributes": {
+                                        "fwdTime": fwdTime,
+                                        "helloTime": helloTime,
+                                        "id": vlanid,
+                                        "maxAge": maxAge,
+                                        "priority": priority,
+                                        "adminSt": adminSt,
+                                        "diameter": diameter,
+                                        "rootMode": rootMode,
+                                        "rootType": rootType
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+        config = configbase(self.serial, payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
+
+
 

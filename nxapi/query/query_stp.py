@@ -8,7 +8,10 @@ from nxapi.cli_base.cli_base import cli_base
 
 
 class query_stp():
-    def __init__(self):
-        pass
+    def __init__(self, serial):
+        self.serial = serial
+
+
+
 
 

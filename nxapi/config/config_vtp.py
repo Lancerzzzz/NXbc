@@ -3,6 +3,8 @@
 # @Time    : 6/4/2019 4:43 AM
 # @Author  : Lxz
 # @File    : config_vtp.py
+from nxapi.config_base.config_base import configbase
+import json
 
 
 class config_vtp():
@@ -46,4 +48,11 @@ class config_vtp():
                         ]
                       }
                     }
+
+    def config_vtp_info(self):
+        config = configbase(self.serial, self.payload)
+        response = config.send()
+        data = json.loads(response.text)
+        return data
+
 
