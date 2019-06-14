@@ -10,6 +10,7 @@ from nxapi.query.query_l3ipif import *
 from  django.views import  View
 from nxapi.config.config_stp import config_stp
 from nxapi.query.query_mac import query_l2allmac
+from nxapi.config.config_trunk import Conf_trunk
 
 
 def login(request):
@@ -97,6 +98,17 @@ class stp(View):
         data = a.config_stpinst()
         return JsonResponse(data,safe=False)
 
+
+class config_trunk(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        id = "eth1/111"
+        mode = "2"
+        trunkVlans = "10-20"
+        config = Conf_trunk(serial,id,mode,trunkVlans)
+        data = config.config_trunk()
+        return HttpResponse(json.dumps(data))
 
 class mac(View):
     def get(self,request):
