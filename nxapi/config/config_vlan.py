@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    :${2019/6/15} ${20:00}
+# @Autor   :Jbh
+# @File    :${config_vlan}.py
+
+
 from nxapi.config_base.config_base import configbase
 import json
 
@@ -104,6 +111,32 @@ class config_vlan():
               }
 }
         config = configbase(self.serial,payload)
+        response = config.send()
+        data = json.loads(response.text)['imdata']
+        return data
+
+    def delete_ifvlan(self,fabEncap,status):
+        payload = {
+              "topSystem": {
+                "children": [
+                  {
+                    "bdEntity": {
+                      "children": [
+                        {
+                          "l2BD": {
+                            "attributes": {
+                              "fabEncap": fabEncap,
+                              "status": status
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+        config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
         return data
