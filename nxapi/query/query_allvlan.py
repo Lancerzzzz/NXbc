@@ -10,9 +10,9 @@ def query_vlan(serial):
     vlanbri = response['ins_api']['outputs']['output']['body']['TABLE_vlanbriefxbrief']['ROW_vlanbriefxbrief']
     return vlanbri
 
-def query_onevlan(serial,eth)
-    cli="show vlan id"+eth
+def query_onevlan(serial,id):
+    cli="show vlan id "+id
     b = cli_base(serial,cli)
     response = json.loads(b.send().text)
-    onevlan = response['ins_api']['outputs']['output']['body']['TABLE_vlanbriefxbrief']['ROW_vlanbriefxbrief']
+    onevlan = response['ins_api']['outputs']['output']['body']['TABLE_vlanbriefid']['ROW_vlanbriefid']
     return onevlan

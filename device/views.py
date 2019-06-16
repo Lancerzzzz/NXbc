@@ -10,7 +10,10 @@ from nxapi.query.query_l3ipif import *
 from  django.views import  View
 from nxapi.config.config_stp import config_stp
 from nxapi.query.query_mac import query_l2allmac
-from nxapi.config.config_trunk import Conf_trunk
+from nxapi.query.query_allvlan import query_vlan
+from nxapi.config.config_vlan import config_vlan
+from nxapi.query.query_allvlan import query_onevlan
+
 
 
 def login(request):
@@ -61,7 +64,6 @@ def login(request):
 #             return HttpResponse(u"username can't be empty!!!")
 #         return
 
-
 class home(View):
 
     def get(self, request):
@@ -99,17 +101,6 @@ class stp(View):
         return JsonResponse(data,safe=False)
 
 
-class config_trunk(View):
-
-    def get(self,request):
-        serial = "9CNTS3XFTXY"
-        id = "eth1/111"
-        mode = "2"
-        trunkVlans = "10-20"
-        config = Conf_trunk(serial,id,mode,trunkVlans)
-        data = config.config_trunk()
-        return HttpResponse(json.dumps(data))
-
 class mac(View):
     def get(self,request):
         data = query_l2allmac("9CNTS3XFTXY")
@@ -126,6 +117,19 @@ class l3ipif(View):
         serial = "9CNTS3XFTXY"
         data = query_l2intbif(serial,'e1/112')
         return JsonResponse(data, safe=False)
+
+class vlan(View):
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        fabEncap = "vlan-40"
+        name = "hey"
+        id="1"
+        data = query_onevlan(serial,id)
+        return JsonResponse(data, safe=False)
+
+
+
+
 
 
 
