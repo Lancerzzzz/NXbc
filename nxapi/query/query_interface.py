@@ -7,3 +7,10 @@ def query_interface_all(serial):
     response = json.loads(query.send().text)
     data = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
     return data
+
+def query_interface_one(serial, eth):
+    cli = "show interface " + eth
+    query = cli_base(serial, cli)
+    response = json.loads(query.send().text)
+    data = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
+    return data
