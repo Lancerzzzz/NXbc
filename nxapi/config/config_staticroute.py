@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# @Time    :2019-06-16 20:10
+# @Time    :2019-06-18 15:46
 # @Autor   :Zh
 # @File    :config_staticroute.py
 
