@@ -1,15 +1,11 @@
 from nxapi.cli_base.cli_base import cli_base
 import json
 
-def query_interface_all(serial):
-    cli = "show interface brief"
-    query = cli_base(serial, cli)
-    response = json.loads(query.send().text)
-    data = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
-    return data
-
-def query_interface_one(serial, eth):
-    cli = "show interface " + eth
+def query_interface(serial, *eth):
+    if len(eth) == 0:
+        cli = "show interface brief"
+    else:
+        cli = "show interface " + eth[0]
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
     data = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
