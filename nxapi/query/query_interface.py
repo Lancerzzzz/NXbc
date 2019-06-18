@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    :2019/6/13 21:19
+# @Autor   :Lsr
+# @File    :config_ip.py
+
 from nxapi.cli_base.cli_base import cli_base
 import json
 
