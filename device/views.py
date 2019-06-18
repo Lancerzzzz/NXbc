@@ -9,15 +9,10 @@ from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
 from  django.views import  View
 from nxapi.config.config_stp import config_stp
-from nxapi.query.query_mac import query_allmac
-from nxapi.config.config_trunk import Conf_trunk
-from nxapi.query.query_intrun import query_oneintru
-from nxapi.query.query_intrun import query_allintru
-from nxapi.config.config_staticroute import conf_staticroute
-from nxapi.query.query_allvlan import query_onevlan
+from nxapi.query.query_mac import *
 from nxapi.query.query_allvlan import query_vlan
-from nxapi.query.query_unicastrouting import query_staticroute
-
+from nxapi.config.config_vlan import config_vlan
+from nxapi.query.query_allvlan import query_onevlan
 
 
 
@@ -108,11 +103,11 @@ class stp(View):
 
 class mac(View):
     def get(self,request):
-        data = query_allmac("9CNTS3XFTXY")
+        data = query_l2allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
     def post(self, request):
-        data = query_allmac("9CNTS3XFTXY")
+        data = query_l2allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
 
@@ -130,14 +125,6 @@ class vlan(View):
         name = "hey"
         id="1"
         data = query_onevlan(serial,id)
-        return JsonResponse(data, safe=False)
-
-
-class staticroute(View):
-
-    def get(self,request):
-        serial = "9CNTS3XFTXY"
-        data = query_staticroute(serial)
         return JsonResponse(data, safe=False)
 
 
