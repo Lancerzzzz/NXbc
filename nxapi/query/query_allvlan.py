@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    :${2019/6/15} ${20:00}
+# @Autor   :Jbh
+# @File    :${query_allvlan}.py
+
+
 from nxapi.cli_base.cli_base import cli_base
 import json
 
