@@ -102,12 +102,16 @@ class stp(View):
 
 
 class mac(View):
-    def get(self,request):
-        data = query_l2allmac("9CNTS3XFTXY")
+    def get(self, request):
+        serial = "9CNTS3XFTXY"
+        eth = "Vlan103"
+        data = query_onemac(serial, eth)
         return JsonResponse(data, safe=False)
 
     def post(self, request):
-        data = query_l2allmac("9CNTS3XFTXY")
+        serial = "9CNTS3XFTXY"
+        eth = "e1/5"
+        data = query_onemac(serial, eth)
         return JsonResponse(data, safe=False)
 
 
