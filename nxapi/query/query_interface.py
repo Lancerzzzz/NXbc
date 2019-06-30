@@ -8,3 +8,4 @@ def query_interface_all(serial):
     response = json.loads(query.send().text)
     data = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
     return data
+

@@ -9,7 +9,7 @@ from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
 from django.views import View
 from nxapi.config.config_stp import config_stp
-from nxapi.query.query_mac import query_l2allmac
+# from nxapi.query.query_mac import query_l2allmac
 
 
 def login(request):
@@ -100,14 +100,14 @@ class stp(View):
         return JsonResponse(data, safe=False)
 
 
-class mac(View):
-    def get(self, request):
-        data = query_l2allmac("9CNTS3XFTXY")
-        return JsonResponse(data, safe=False)
-
-    def post(self, request):
-        data = query_l2allmac("9CNTS3XFTXY")
-        return JsonResponse(data, safe=False)
+# class mac(View):
+#     def get(self, request):
+#         data = query_l2allmac("9CNTS3XFTXY")
+#         return JsonResponse(data, safe=False)
+#
+#     def post(self, request):
+#         data = query_l2allmac("9CNTS3XFTXY")
+#         return JsonResponse(data, safe=False)
 
 
 class l3ipif(View):

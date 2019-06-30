@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
     path('', views.login, name='login'),
     path('home/', views.home.as_view(), name="home"),
-    path('stp/', views.stp.as_view(), name="stp"),
-    path('mac/', views.mac.as_view(), name="mac"),
-    path('l3ipif/', views.l3ipif.as_view(), name="l3ipif"),
+    # path('stp/', views.stp.as_view(), name="stp"),
+    # path('mac/', views.mac.as_view(), name="mac"),
+    # path('l3ipif/', views.l3ipif.as_view(), name="l3ipif"),
 ]

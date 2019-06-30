@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('device/', include('device.urls')),
     path('', include('home.urls')),
-    path('task/', include('task.urls'))
+    path('task/', include('task.urls')),
+    path('nxapi/', include('nxapi.urls'))
 ]

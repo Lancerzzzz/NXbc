@@ -67,8 +67,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'home',
     'task',
-    'djcelery',
-    'django_celery_results',
+    # 'djcelery',
+    # 'django_celery_results',
 ]
 
 MIDDLEWARE = [
