@@ -14,6 +14,10 @@ def query_onemac(serial, *eth):
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
     onemac = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
+    if len(eth) != 0:
+        li = []
+        li.append(onemac)
+        return li
     EthernetLi = []
     VlanLi = []
     for s in onemac:
