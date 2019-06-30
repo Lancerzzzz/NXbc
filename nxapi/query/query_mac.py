@@ -1,8 +1,9 @@
 from nxapi.cli_base.cli_base import cli_base
 import json
 
+
 # show int e1/112 mac
-def query_l2onemac(serial,eth):
+def query_onemac(serial, eth):
     cli = "show int " + eth + " mac"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
@@ -11,7 +12,7 @@ def query_l2onemac(serial,eth):
 
 
 # show int mac
-def query_l2allmac(serial):
+def query_allmac(serial):
     cli = "show int mac"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)

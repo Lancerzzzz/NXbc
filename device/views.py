@@ -64,7 +64,9 @@ def login(request):
 class home(View):
 
     def get(self, request):
-        return HttpResponse('Hello, World!get')
+        d = devicemn.devicemn()
+        data = d.get_all_device()
+        return render(request, "deviceList.html", {"delist": data})
 
     def post(self, request):
         name = str(request.POST["username"])

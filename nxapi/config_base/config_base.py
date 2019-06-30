@@ -20,4 +20,3 @@ class configbase():
         response = con.json_method(self.payload, "POST")
         con.aaa_logout()
         return response
-

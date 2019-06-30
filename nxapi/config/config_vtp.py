@@ -14,45 +14,43 @@ class config_vtp():
         self.domain = domain
         self.password = password
         self.version = version
-        self.payload ={
-                      "topSystem": {
-                        "children": [
-                          {
-                            "vtpEntity": {
-                              "children": [
+        self.payload = {
+            "topSystem": {
+                "children": [
+                    {
+                        "vtpEntity": {
+                            "children": [
                                 {
-                                  "vtpInst": {
-                                    "attributes": {
-                                      "domain": "ccie",
-                                      "password": "ccie",
-                                      "version": "2"
+                                    "vtpInst": {
+                                        "attributes": {
+                                            "domain": "ccie",
+                                            "password": "ccie",
+                                            "version": "2"
+                                        }
                                     }
-                                  }
                                 }
-                              ]
-                            }
-                          },
-                          {
-                            "fmEntity": {
-                              "children": [
+                            ]
+                        }
+                    },
+                    {
+                        "fmEntity": {
+                            "children": [
                                 {
-                                  "fmVtp": {
-                                    "attributes": {
-                                      "adminSt": "enabled"
+                                    "fmVtp": {
+                                        "attributes": {
+                                            "adminSt": "enabled"
+                                        }
                                     }
-                                  }
                                 }
-                              ]
-                            }
-                          }
-                        ]
-                      }
+                            ]
+                        }
                     }
+                ]
+            }
+        }
 
     def config_vtp_info(self):
         config = configbase(self.serial, self.payload)
         response = config.send()
         data = json.loads(response.text)
         return data
-
-

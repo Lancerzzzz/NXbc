@@ -50,8 +50,8 @@ def query_l2allintif(serial):
 
 
 # ok show int e1/112
-def query_l2intif(serial,eth):
-    cli = "show int "+eth
+def query_l2intif(serial, eth):
+    cli = "show int " + eth
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
     allint = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
@@ -59,7 +59,7 @@ def query_l2intif(serial,eth):
 
 
 # ok show int e1/112 b
-def query_l2intbif(serial,eth):
+def query_l2intbif(serial, eth):
     cli = "show int " + eth + " b"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)

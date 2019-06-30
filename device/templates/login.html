@@ -1,31 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
+    <link href="favicon.ico" rel="shortcut icon">
     <meta charset="UTF-8">
     <title>Login</title>
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
-</head>
-<body style="align-self: center">
-<form action="/home/" method="post" style="margin-left:500px;margin-top:200px;">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     {% csrf_token %}
-    <div class="form-group">
-        <label for="user" stype="display:inline;">username:</label>
-        <input type="text" class="form-control" name="username" id="user" style="display:inline;width:200px;" autocomplete="off"/>
-    </div>
-    <div class="form-group">
-        <label for="password" style="display:inline;"> password:</label>
-       <input type="password"  class="form-control" id="password" name="passwd" style="display:inline;width:200px;" autocomplete="off"/>
-    </div>
-    <div style="text-align: center">
-        {% buttons %}
-        <input  class="btn btn-primary" type="submit" value="login">
-        <input  class="btn btn-primary" type="reset"  value="reset"><br>
-        {% endbuttons %}
-    </div>
+    <script>
+        function validateUse() {
+            var use = document.getElementById("user");
+            if (use.value == null || use.value == "") {
+                use.value = "请输入用户名和密码";
+                return false;
+            } else {
+                return true;
+            }
+        }
 
-</form>
+        function validatePass() {
+            var pass = document.getElementById("password");
+            var use = document.getElementById("user");
+            if (pass.value == null || pass.value == "") {
+                use.value = "请输入用户名和密码";
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function validateForm() {
+            if (validatePass() && validateUse()) {
+                // using jQuery
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                var csrftoken = getCookie('csrftoken');
+                console.log(csrftoken);
+                {#return false;#}
+                var pass = document.getElementById("password");
+                var use = document.getElementById("user");
+                var formData = new FormData();
+                {#console.log(use.value);#}
+                formData.append("username", use.value);
+                formData.append("passwd", pass.value);
+                console.log(formData);
+                var datas = "";
+
+                function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+
+                $.ajaxSetup({
+                    beforeSend: function (xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $.ajax({
+                    url: "/home/",
+                    type: "POST",
+                    cache: false,
+                    data: formData,
+                    contentType: false,
+                    async:false,
+                    processData: false,
+                    success: function (data) {
+                        datas = data;
+                        if (data === "0") {
+                            alert("您的账户名或者密码错误");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                });
+                console.log("datas:"+datas);
+                if (datas === "0") {
+                    console.log(datas);
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+
+        }
+
+    </script>
+</head>
+<body style="background-image: url('../static/1.jpg'); background-size: 100% 100%;">
+
+<div class="card"
+     style="width: 400px;text-align: center;margin: 0 auto;top: 30%;background-color:rgba(255,255,255,0.3);">
+    <div class="card-body">
+        <form action="/home/" id="submit" method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="user" stype="display:inline;">用户名:</label>
+                <input type="text" class="form-control" name="username" id="user"
+                       style="display:inline;width:200px;"
+                       autocomplete="off"/>
+            </div>
+            <div class="form-group">
+                <label for="password" style="display:inline;"> 密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                <input type="password" class="form-control" id="password" name="passwd"
+                       style="display:inline;width:200px;" autocomplete="off"/>
+            </div>
+            <div style="text-align: center">
+                {% buttons %}
+                    <input id="sub" class="btn btn-primary" type="submit" value="登录">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="btn btn-primary" type="reset" value="重置"><br>
+                {% endbuttons %}
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

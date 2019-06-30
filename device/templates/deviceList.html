@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<center>
+<!--<h1>test infomation</h1>-->
+<!--    {{ delist }}-->
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">passwd</th>
+      <th scope="col">url</th>
+        <th scope="col">systemUptime</th>
+      <th scope="col">serial</th>
+      <th scope="col">status</th>
+      <th scope="col">dn</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in delist %}
+        <tr>
+       {% for j in i.values %}
+                <td>{{ j }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</center>
+</body>
+</html>

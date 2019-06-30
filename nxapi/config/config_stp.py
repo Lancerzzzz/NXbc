@@ -75,24 +75,24 @@ class config_stp():
 
     def config_stp_mode(self):
         payload = {
-                    "topSystem": {
-                        "children": [
-                            {
-                                "stpEntity": {
-                                    "children": [
-                                        {
-                                            "stpInst": {
-                                                "attributes": {
-                                                    "mode": self.mode
-                                                }
-                                            }
+            "topSystem": {
+                "children": [
+                    {
+                        "stpEntity": {
+                            "children": [
+                                {
+                                    "stpInst": {
+                                        "attributes": {
+                                            "mode": self.mode
                                         }
-                                    ]
+                                    }
                                 }
-                            }
-                        ]
+                            ]
+                        }
                     }
-                }
+                ]
+            }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
@@ -104,31 +104,31 @@ class config_stp():
 
     def config_stp_mst(self, mstname, revision):
         payload = {
-                  "topSystem": {
-                    "children": [
-                      {
+            "topSystem": {
+                "children": [
+                    {
                         "stpEntity": {
-                          "children": [
-                            {
-                              "stpInst": {
-                                "children": [
-                                  {
-                                    "stpMstEntity": {
-                                      "attributes": {
-                                        "regName": mstname,
-                                        "rev": revision
-                                      }
+                            "children": [
+                                {
+                                    "stpInst": {
+                                        "children": [
+                                            {
+                                                "stpMstEntity": {
+                                                    "attributes": {
+                                                        "regName": mstname,
+                                                        "rev": revision
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
+                                }
+                            ]
                         }
-                      }
-                    ]
-                  }
-                }
+                    }
+                ]
+            }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
@@ -136,75 +136,75 @@ class config_stp():
 
     def config_stp_mst_instance(self, instanceid, vlanrange):
         payload = {
-                  "topSystem": {
-                    "children": [
-                      {
+            "topSystem": {
+                "children": [
+                    {
                         "stpEntity": {
-                          "children": [
-                            {
-                              "stpInst": {
-                                "children": [
-                                  {
-                                    "stpMstEntity": {
-                                      "children": [
-                                        {
-                                          "stpMstDom": {
-                                            "attributes": {
-                                              "id": instanceid,
-                                              "vlanRange": vlanrange
+                            "children": [
+                                {
+                                    "stpInst": {
+                                        "children": [
+                                            {
+                                                "stpMstEntity": {
+                                                    "children": [
+                                                        {
+                                                            "stpMstDom": {
+                                                                "attributes": {
+                                                                    "id": instanceid,
+                                                                    "vlanRange": vlanrange
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
                                             }
-                                          }
-                                        }
-                                      ]
+                                        ]
                                     }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
+                                }
+                            ]
                         }
-                      }
-                    ]
-                  }
-                }
+                    }
+                ]
+            }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
         return data
 
     def config_stp_mst_priority(self, instanceid, priority):
-        payload={
-              "topSystem": {
+        payload = {
+            "topSystem": {
                 "children": [
-                  {
-                    "stpEntity": {
-                      "children": [
-                        {
-                          "stpInst": {
+                    {
+                        "stpEntity": {
                             "children": [
-                              {
-                                "stpMstEntity": {
-                                  "children": [
-                                    {
-                                      "stpMstDom": {
-                                        "attributes": {
-                                          "id": instanceid,
-                                          "priority": priority
-                                        }
-                                      }
+                                {
+                                    "stpInst": {
+                                        "children": [
+                                            {
+                                                "stpMstEntity": {
+                                                    "children": [
+                                                        {
+                                                            "stpMstDom": {
+                                                                "attributes": {
+                                                                    "id": instanceid,
+                                                                    "priority": priority
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
                                     }
-                                  ]
                                 }
-                              }
                             ]
-                          }
                         }
-                      ]
                     }
-                  }
                 ]
-              }
             }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
@@ -256,41 +256,41 @@ class config_stp():
         :return: bool
         """
         payload = {
-                "topSystem": {
-                    "children": [
-                        {
-                            "stpEntity": {
-                                "children": [
-                                    {
-                                        "stpInst": {
-                                            "attributes": {
-                                                "mode": "mst"
-                                            },
-                                            "children": [
-                                                {
-                                                    "stpMstEntity": {
-                                                        "attributes": {
-                                                                "adminSt": adminSt,
-                                                                "fwdTime": fwdtime,
-                                                                "helloTime": helloTime,
-                                                                "maxAge": maxAge,
-                                                                "maxHops": maxHops,
-                                                                "regName": regName,
-                                                                "rev": rev,
-                                                                "simulate": simulate,
-                                                                }
-                                                             }
-                                                        }
-
-                                                    ]
+            "topSystem": {
+                "children": [
+                    {
+                        "stpEntity": {
+                            "children": [
+                                {
+                                    "stpInst": {
+                                        "attributes": {
+                                            "mode": "mst"
+                                        },
+                                        "children": [
+                                            {
+                                                "stpMstEntity": {
+                                                    "attributes": {
+                                                        "adminSt": adminSt,
+                                                        "fwdTime": fwdtime,
+                                                        "helloTime": helloTime,
+                                                        "maxAge": maxAge,
+                                                        "maxHops": maxHops,
+                                                        "regName": regName,
+                                                        "rev": rev,
+                                                        "simulate": simulate,
                                                     }
                                                 }
-                                            ]
-                                        }
+                                            }
+
+                                        ]
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         }
+                    }
+                ]
+            }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
@@ -322,42 +322,39 @@ class config_stp():
         https://pubhub.devnetcloud.com/media/nx-dme-ref-922/docs/Discovery%20Protocols/stp:Vlan/
         """
         payload = {
-                  "topSystem": {
-                    "children": [
-                      {
+            "topSystem": {
+                "children": [
+                    {
                         "stpEntity": {
-                          "children": [
-                            {
-                              "stpInst": {
-                                "children": [
-                                  {
-                                    "stpVlan": {
-                                      "attributes": {
-                                        "fwdTime": fwdTime,
-                                        "helloTime": helloTime,
-                                        "id": vlanid,
-                                        "maxAge": maxAge,
-                                        "priority": priority,
-                                        "adminSt": adminSt,
-                                        "diameter": diameter,
-                                        "rootMode": rootMode,
-                                        "rootType": rootType
-                                      }
+                            "children": [
+                                {
+                                    "stpInst": {
+                                        "children": [
+                                            {
+                                                "stpVlan": {
+                                                    "attributes": {
+                                                        "fwdTime": fwdTime,
+                                                        "helloTime": helloTime,
+                                                        "id": vlanid,
+                                                        "maxAge": maxAge,
+                                                        "priority": priority,
+                                                        "adminSt": adminSt,
+                                                        "diameter": diameter,
+                                                        "rootMode": rootMode,
+                                                        "rootType": rootType
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
+                                }
+                            ]
                         }
-                      }
-                    ]
-                  }
-                }
+                    }
+                ]
+            }
+        }
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
         return data
-
-
-

@@ -17,7 +17,3 @@ class cli_base():
         device = devicelist.objects.get(serial=self.serial)
         con = Httpsconn(device.username, device.passwd, device.url)
         return con.cli_method(self.cli)
-
-
-
-
