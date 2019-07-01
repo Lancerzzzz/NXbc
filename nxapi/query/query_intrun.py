@@ -13,7 +13,9 @@ def query_oneintru(serial, eth):
     cli = "show int " + eth + " trunk"
     query = cli_base(serial, cli)
     response = json.loads(query.send().text)
+    print(response)
     one1 = response['ins_api']['outputs']['output']['body']['TABLE_allowed_vlans']['ROW_allowed_vlans']
+    print(one1)
     one2 = response['ins_api']['outputs']['output']['body']['TABLE_vtp_pruning']['ROW_vtp_pruning']
     one3 = response['ins_api']['outputs']['output']['body']['TABLE_stp_forward']['ROW_stp_forward']
     one4 = response['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
@@ -22,6 +24,7 @@ def query_oneintru(serial, eth):
     one.update(one2)
     one.update(one3)
     one.update(one4)
+    print(one)
     return one
 
 
