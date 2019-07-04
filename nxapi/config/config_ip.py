@@ -59,7 +59,7 @@ class config_ip():
         config = configbase(self.serial, self.payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        if data==[]:
+        if data == []:
             return True
         else:
             return False
