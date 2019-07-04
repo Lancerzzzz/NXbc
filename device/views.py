@@ -9,10 +9,20 @@ from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
 from  django.views import  View
 from nxapi.config.config_stp import config_stp
-from nxapi.query.query_mac import *
-from nxapi.query.query_allvlan import query_vlan
-from nxapi.config.config_vlan import config_vlan
+from nxapi.config.config_trunk import Conf_trunk
+from nxapi.query.query_intrun import query_oneintru
+from nxapi.query.query_intrun import query_allintru
+from nxapi.config.config_staticroute import conf_staticroute
 from nxapi.query.query_allvlan import query_onevlan
+from nxapi.query.query_allvlan import query_vlan
+from nxapi.query.query_unicastrouting import query_staticroute
+from nxapi.query.query_interface import query_interface_all
+from nxapi.query.query_intrun import query_allintru
+from nxapi.query.query_intrun import query_oneintru
+from nxapi.query.query_l3ipif import query_l3ipif
+from nxapi.query.query_l3ipif import query_l3oneipif
+from nxapi.query.query_l3ipif import query_l2intbif
+
 
 
 
@@ -102,16 +112,12 @@ class stp(View):
 
 
 class mac(View):
-    def get(self, request):
-        serial = "9CNTS3XFTXY"
-        eth = "Vlan103"
-        data = query_onemac(serial, eth)
+    def get(self,request):
+        data = query_allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
     def post(self, request):
-        serial = "9CNTS3XFTXY"
-        eth = "e1/5"
-        data = query_onemac(serial, eth)
+        data = query_allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
 
@@ -122,6 +128,23 @@ class l3ipif(View):
         data = query_l2intbif(serial,'e1/112')
         return JsonResponse(data, safe=False)
 
+
+class l3allipif(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        data = query_l3ipif(serial)
+        return JsonResponse(data, safe=False)
+
+
+class l3oneipif(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        eth = 'mgmt0'
+        data = query_l3oneipif(serial,eth)
+        return JsonResponse(data, safe=False)
+
 class vlan(View):
     def get(self,request):
         serial = "9CNTS3XFTXY"
@@ -129,6 +152,48 @@ class vlan(View):
         name = "hey"
         id="1"
         data = query_onevlan(serial,id)
+        return JsonResponse(data, safe=False)
+
+
+class staticroute(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        data = query_staticroute(serial)
+        return JsonResponse(data, safe=False)
+
+
+class interfaces(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        data = query_interface_all(serial)
+        return JsonResponse(data, safe=False)
+
+
+class alltrunk(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        data = query_allintru(serial)
+        return JsonResponse(data, safe=False)
+
+
+class onetrunk(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        eth = 'eth1/112'
+        data = query_oneintru(serial,eth)
+        return JsonResponse(data, safe=False)
+
+
+class oneint(View):
+
+    def get(self,request):
+        serial = "9CNTS3XFTXY"
+        eth = 'eth1/112'
+        data = query_l2intbif(serial,eth)
         return JsonResponse(data, safe=False)
 
 

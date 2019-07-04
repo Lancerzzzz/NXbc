@@ -16,6 +16,4 @@ urlpatterns = [
     path('l3ipif/', views.l3ipif.as_view(), name="l3ipif"),
     path('config_trunk/', views.config_trunk.as_view(), name="config_trunk"),
     path('intrun/', views.intrun.as_view(), name="intrun"),
-    path('config_staticroute/', views.config_staticroute.as_view(), name="config_staticroute"),
-    path('staticroute/', views.staticroute.as_view(), name="staticroute"),
 ]
