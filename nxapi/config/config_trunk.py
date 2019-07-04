@@ -89,4 +89,7 @@ class Conf_trunk():
         config = configbase(self.serial,payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        if len(data)==0:
+            return True
+        else:
+            return False

@@ -153,4 +153,7 @@ class conf_staticroute():
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)
-        return data
+        if len(data) == 0:
+            return True
+        else:
+            return False
