@@ -9,7 +9,6 @@ from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
 from  django.views import  View
 from nxapi.config.config_stp import config_stp
-from nxapi.query.query_mac import query_allmac
 from nxapi.config.config_trunk import Conf_trunk
 from nxapi.query.query_intrun import query_oneintru
 from nxapi.query.query_intrun import query_allintru
