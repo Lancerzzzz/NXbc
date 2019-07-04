@@ -50,6 +50,7 @@ def dict_slice(ori_dict, start, end):
     slice_dict = {k: ori_dict[k] for k in list(ori_dict.keys())[start:end]}
     return slice_dict
 
+
 # ok show int mgmt0
 def query_l3oneipif(serial,eth):
     cli = "show ip int "+eth
@@ -58,6 +59,7 @@ def query_l3oneipif(serial,eth):
     allip = response['ins_api']['outputs']['output']['body']['TABLE_intf']['ROW_intf']
     allip = dict_slice(allip, 1, 12)
     return allip
+
 
 # ok show int b
 def query_l2allintif(serial):
