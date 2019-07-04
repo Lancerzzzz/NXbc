@@ -1,6 +1,7 @@
 from nxapi.cli_base.cli_base import cli_base
 import json
 
+
 def query_route(serial):
     cli = "show ip route"
     query = cli_base(serial, cli)
