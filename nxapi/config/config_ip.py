@@ -9,16 +9,16 @@ import json
 
 """
 使用方法：
-a = config_ip(serial, name, eth, addr)
-a.config_ipv4()
+a = config_ip(serial, eth, addr)
+data = a.config_ipv4()
 其中eth = "eth1/1"这种形式Not e1/1
 addr = "10.10.10.1/10"这种形式
 """
 
 class config_ip():
-    def __init__(self, serial, name, eth, addr):
+    def __init__(self, serial, eth, addr):
         self.serial = serial
-        self.name = name
+        self.name = "default"
         self.eth = eth
         self.addr = addr    # addr = '10.10.10.1/10'
         self.payload = {
@@ -30,7 +30,7 @@ class config_ip():
                                 "children": [{
                                     "ipv4Dom": {
                                         "attributes": {
-                                            "name": name
+                                            "name": "default"
                                         },
                                         "children": [{
                                             "ipv4If": {
@@ -59,4 +59,7 @@ class config_ip():
         config = configbase(self.serial, self.payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        if data==[]:
+            return True
+        else:
+            return False
