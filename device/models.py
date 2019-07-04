@@ -12,3 +12,7 @@ class devicelist(models.Model):
     status = models.CharField(max_length=50)
     dn = models.CharField(max_length=30)
 
+class receivelist(models.Model):
+    emailaccount = models.CharField(max_length=20)
+
+

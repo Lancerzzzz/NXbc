@@ -14,6 +14,9 @@ urlpatterns = [
     path('stp/', views.stp.as_view(), name="stp"),
     path('mac/', views.mac.as_view(), name="mac"),
     path('l3ipif/', views.l3ipif.as_view(), name="l3ipif"),
-    path('config_trunk/', views.config_trunk.as_view(), name="config_trunk"),
-    path('intrun/', views.intrun.as_view(), name="intrun"),
+    path('vlan/', views.vlan.as_view(), name="vlan"),
+    path('sendmail/', views.sendmail.as_view(), name="sendmail"),
+    path('receiveList/', views.receiveList.as_view(), name="receiveList"),
+    path('delTar/',views.delTar.as_view(), name="delTar"),
+    path('createTar/',views.createTar.as_view(), name='createTar')
 ]

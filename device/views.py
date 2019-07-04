@@ -3,17 +3,20 @@ from django.http.response import JsonResponse, HttpResponse
 
 # Create your views here.
 from .models import devicelist
+from .models import receivelist
 from devicemn import devicemn
 from nxapi.cli_base import cli_base
 from nxapi.config.config_stp import config_stp
 from nxapi.query.query_l3ipif import *
-from  django.views import  View
+from django.views import View
 from nxapi.config.config_stp import config_stp
-from nxapi.query.query_mac import query_l2allmac
+from nxapi.query.query_mac import query_allmac
+from nxapi.query.query_mac import query_onemac
 from nxapi.query.query_allvlan import query_vlan
 from nxapi.config.config_vlan import config_vlan
 from nxapi.query.query_allvlan import query_onevlan
 
+from django.core.mail import send_mail
 
 
 def login(request):
@@ -76,7 +79,7 @@ class home(View):
         data = d.get_all_device()
         if name != None and not name.__eq__(""):
             if name == "admin" and pwd == "admin":
-                return render(request, "home.html",{"delist":data})
+                return render(request, "home.html", {"delist": data})
             else:
                 return HttpResponse(u"passwd or username wrong!!!!")
 
@@ -89,7 +92,7 @@ class stp(View):
     def get(self, request):
         a = config_stp("9CNTS3XFTXY", mode="3")
         data = a.config_stpinst()
-        return JsonResponse(data,safe=False)
+        return JsonResponse(data, safe=False)
 
     def post(self, request):
         # serial = str(request.POST["serial"])
@@ -98,11 +101,11 @@ class stp(View):
         mode = "3"
         a = config_stp(serial, mode)
         data = a.config_stpinst()
-        return JsonResponse(data,safe=False)
+        return JsonResponse(data, safe=False)
 
 
 class mac(View):
-    def get(self,request):
+    def get(self, request):
         data = query_l2allmac("9CNTS3XFTXY")
         return JsonResponse(data, safe=False)
 
@@ -113,27 +116,73 @@ class mac(View):
 
 class l3ipif(View):
 
-    def get(self,request):
+    def get(self, request):
         serial = "9CNTS3XFTXY"
-        data = query_l2intbif(serial,'e1/112')
+        data = query_l2intbif(serial, 'e1/112')
         return JsonResponse(data, safe=False)
+
 
 class vlan(View):
-    def get(self,request):
+    def get(self, request):
         serial = "9CNTS3XFTXY"
-        fabEncap = "vlan-40"
+        fabEncap = "vlan-30"
         name = "hey"
-        id="1"
-        data = query_onevlan(serial,id)
+        id = "1"
+        status = "deleted"
+        b = config_vlan(serial)
+        data = b.delete_ifvlan(fabEncap, status)
         return JsonResponse(data, safe=False)
 
 
+class sendmail(View):
+    def get(self, request):
+        headline = "Subject"
+        content = "hello"
+        SourEmail = "15606924217@163.com"
+        TarEmail = ['355919474@qq.com', '1652085034@qq.com']
+        send_mail(headline, content, SourEmail,
+                  TarEmail, fail_silently=False)
+        data = "successful"
+        return JsonResponse(data, safe=False)
 
 
+class receiveList(View):
+    def get(self, request):
+        tarList = receivelist.objects.values()
+        print("tarList:", tarList)
+        tarJson = {}
+        tar = []
+        for i in tarList:
+            tar.append(i)
+        tarJson['info'] = tar
+        print("tarJson:", tarJson)
+        return JsonResponse(tarJson, safe=False)
 
 
+class delTar(View):
+    def get(self, request):
+        tarDel = receivelist.objects.filter(emailaccount='123456789@qq.com').delete()
+        tarList = receivelist.objects.values()
+        print("tarList:", tarList)
+        tarJson = {}
+        tar = []
+        for i in tarList:
+            tar.append(i)
+        tarJson['info'] = tar
+        print("tarJson:", tarJson)
+        return JsonResponse(tarJson, safe=False)
 
-
-
-
+class createTar(View):
+    def get(self, request):
+        tarCreate = receivelist.objects.create(emailaccount='123456789@qq.com')
+        tarCreate.save()
+        tarList = receivelist.objects.values()
+        print("tarList:", tarList)
+        tarJson = {}
+        tar = []
+        for i in tarList:
+            tar.append(i)
+        tarJson['info'] = tar
+        print("tarJson:", tarJson)
+        return JsonResponse(tarJson, safe=False)
 
