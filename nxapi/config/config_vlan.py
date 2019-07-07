@@ -87,7 +87,7 @@ class config_vlan():
         config = configbase(self.serial,payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        return True
 
     def creat_ifvlan(self,fabEncap,name):
         payload = {
@@ -113,7 +113,7 @@ class config_vlan():
         config = configbase(self.serial,payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        return True
 
     def delete_ifvlan(self,fabEncap,status):
         payload = {
@@ -139,4 +139,4 @@ class config_vlan():
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        return True
