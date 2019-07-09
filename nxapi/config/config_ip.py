@@ -10,7 +10,7 @@ import json
 """
 使用方法：
 a = config_ip(serial, eth, addr)
-data = a.config_ipv4()
+a.config_ipv4()
 其中eth = "eth1/1"这种形式Not e1/1
 addr = "10.10.10.1/10"这种形式
 """
@@ -18,13 +18,25 @@ addr = "10.10.10.1/10"这种形式
 class config_ip():
     def __init__(self, serial, eth, addr):
         self.serial = serial
-        self.name = "default"
         self.eth = eth
         self.addr = addr    # addr = '10.10.10.1/10'
         self.payload = {
             "topSystem": {
                 "children": [{
-                    "ipv4Entity": {
+                        "interfaceEntity": {
+                            "children": [
+                                {
+                                    "l1PhysIf": {
+                                        "attributes": {
+                                            "id": eth,
+                                            "layer": "Layer3",
+                                            "userCfgdFlags": "admin_layer"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },{"ipv4Entity": {
                         "children": [{
                             "ipv4Inst": {
                                 "children": [{
