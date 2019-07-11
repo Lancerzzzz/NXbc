@@ -6,6 +6,9 @@ from django.views import View
 from .query.query_interface import query_interface_all
 from device.models import devicelist
 from nxapi.query.query_mac import query_onemac
+from .config import config_ip
+from .config import config_ip
+from .query import query_allvlan
 
 
 class mac(View):
@@ -61,3 +64,26 @@ class queryDevice(View):
         # result = {'device':result}
         # print(result)
         return JsonResponse(result, safe=False)
+
+
+class ipView(View):
+    def get(self, request):
+        return render(request, "confIP.html", {"test": "test"})
+
+
+class ipConf(View):
+    def post(self, request):
+        serial = str(request.POST["serial"])
+        eth = str(request.POST["eth"])
+        # eth = "eth1/118"
+        ip = str(request.POST['ip'])
+        print("eth:", eth, "serial:", serial, "ip:", ip)
+        confIP = config_ip.config_ip(serial,  eth, ip)
+        info = confIP.config_ipv4()
+        return HttpResponse(info)
+
+class vlanView(View):
+    def get(self, request):
+        data = query_allvlan.query_vlan("9CNTS3XFTXY")
+        return render(request, "queryVlan.html", {"data": data})
+

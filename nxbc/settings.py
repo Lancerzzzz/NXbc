@@ -11,31 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import djcelery
 # ^^^ The above is required if you want to import from the celery
 # library.  If you don't have this then `from celery.schedules import`
 # becomes `proj.celery.schedules` in Python 2.x since it allows
 # for relative imports by default.
 
-# Celery settings
-from celery.schedules import crontab
-
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-# djcelery.setup_loader()
-BROKER_URL = 'amqp://guest@localhost//'
-BROKER_POOL_LIMIT = 4
-# CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_TIMEZONE = 'Asia/Shanghai'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 28800}
-CELERY_IMPORTS = ('task.tasks',)
-CELERYBEAT_SCHEDULE = {
-    'first_task': {
-        "task": "appname.tasks.celery_test",
-        "schedule": crontab(minute='*/1'),
-        "args": (),
-    },
-}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -66,7 +46,7 @@ INSTALLED_APPS = [
     'nxapi',
     'bootstrap4',
     'home',
-    'task',
+    # 'task',
     # 'djcelery',
     # 'django_celery_results',
 ]

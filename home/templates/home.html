@@ -17,6 +17,12 @@
         $("#item").attr("src", '/123/');
         console.log("OK")
     }
+    function interface() {
+        $("#item").attr("src", '/nxapi/interface/');
+    }
+    function confIP() {
+        $("#item").attr("src", '/nxapi/ipView/');
+    }
 </script>
 <body>
 
@@ -39,7 +45,7 @@
         <a class="dropdown-item" href="#">Trunk</a>
         <a class="dropdown-item" href="#">Spanning-tree</a>
         <a class="dropdown-item" href="#">DHCP中继</a>
-        <a class="dropdown-item" href="#">IPV4</a>
+        <a class="dropdown-item" href="#" onclick="confIP()">IPV4</a>
         <a class="dropdown-item" href="#">静态路由</a>
       </div>
     </li>
@@ -52,7 +58,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="#">MAC表</a>
         <a class="dropdown-item" href="#">路由表</a>
-        <a class="dropdown-item" href="#">接口信息</a>
+        <a class="dropdown-item" href="#" onclick="interface()">接口信息</a>
         <a class="dropdown-item" href="#">VLAN信息</a>
       </div>
     </li>

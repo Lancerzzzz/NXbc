@@ -12,7 +12,6 @@
 <body>
 {% csrf_token %}
 <script>
-    var datas = {};
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -53,63 +52,193 @@
             success: function (data) {
                 console.log(data);
                 for (i = 0; i < data['serial'].length; i++) {
-                    $('#serialList').append("<option value='"+data['serial'][i]+"'>" + data['serial'][i] + "</option>")
+                    $('#serialList').append("<option value='" + data['serial'][i] + "'>" + data['serial'][i] + "</option>")
                 }
             }
         }),
-        
     );
+
     function queryInterface() {
         var serialSelected = $("#serialList").find("option:selected").val();
         console.log(serialSelected);
         var formData = new FormData();
-        formData.append("serial",serialSelected);
+        formData.append("serial", serialSelected);
         $.ajax({
             url: "/nxapi/queryInterface/",
             type: "POST",
             cache: false,
-            data:formData,
+            data: formData,
             contentType: false,
             processData: false,
             success: function (data) {
                 console.log(data);
-                /*
-                for (i = 0; i < data['serial'].length; i++) {
-                    $('#serialList').append("<option value='"+data['serial'][i]+"'>" + data['serial'][i] + "</option>")
-                }*/
+                for (i = 0; i < data.length; i++) {
+                    if (data[i].interface.substr(0, 1) == "E")
+                        $('#port').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].portchan + "</td><td>" + data[i].portmode + "</td><td>" + data[i].ratemode + "</td><td>" + data[i].speed + "</td><td>" + data[i].state + "</td><td>" + data[i].state_rsn_desc + "</td><td>" + data[i].type + "</td><td>" + data[i].vlan + "</td><tr>");
+                    else if (data[i].interface.substr(0, 1) == "p")
+                        $('#portChannel').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].portmode + "</td><td>" + data[i].proto + "</td><td>" + data[i].ratemode + "</td><td>" + data[i].speed + "</td><td>" + data[i].state + "</td><td>" + data[i].state_rsn_desc + "</td><td>" + data[i].type + "</td><td>" + data[i].vlan + "</td><tr>");
+                    else if (data[i].interface.substr(0, 1) == "V")
+                        $('#vlan').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].svi_admin_state + "</td><td>" + data[i].svi_rsn_desc + "</td><tr>");
+                    else if (data[i].interface.substr(0, 1) == "l")
+                        $('#loopback').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].state + "</td><tr>");
+                }
             }
         })
     }
+
+    $("#panelT1").click(function () {
+        $("#panelB1").slideToggle("slow");
+    });
+    $("#panelT2").click(function () {
+        $("#panelB2").slideToggle("slow");
+    });
+    $("#panelT3").click(function () {
+        $("#panelB3").slideToggle("slow");
+    });
+    $("#panelT4").click(function () {
+        $("#panelB4").slideToggle("slow");
+    });
 </script>
 <form role="form">
     <div>
         <div class="form-group">
-        <select class="form-control" id="serialList" style="width: 30%;display: inline;float:left;margin-left: 20px;">
-            <option value="" disabled selected>设备选择</option>
-        </select>
-    </div>
-    <button type="button" class="btn btn-white" style="display: inline;float: left;margin-left: 20px;"  onclick="queryInterface()">查询</button>
+            <select class="form-control" id="serialList"
+                    style="width: 30%;display: inline;float:left;margin-left: 20px;">
+                <option value="" disabled selected>设备选择</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-white" style="display: inline;float: left;margin-left: 20px;"
+                onclick="queryInterface()">查询
+        </button>
     </div>
 </form>
-<<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">interface</th>
-      <th scope="col">ip_addr</th>
-      <th scope="col">mtu</th>
-      <th scope="col">speed</th>
-        <th scope="col">state</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for i in delist %}
-        <tr>
-       {% for j in i.values %}
-                <td>{{ j }}</td>
-        {% endfor %}
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
+
+<br><br><br>
+<div class="accordion" id="accordionExample">
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    以太网网口信息
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <table class="table table-dark table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">interface</th>
+                            <th scope="col">portchan</th>
+                            <th scope="col">portmode</th>
+                            <th scope="col">ratemode</th>
+                            <th scope="col">speed</th>
+                            <th scope="col">state</th>
+                            <th scope="col">state_rsn_desc</th>
+                            <th scope="col">type</th>
+                            <th scope="col">vlan</th>
+                        </tr>
+                        </thead>
+                        <tbody id="port">
+
+                        </tbody>
+                    </table>
+                </div>
+
+        </div>
+    </div>
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="false" aria-controls="collapseFour">
+                    Loopback信息
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseFour" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                <div class="card-body">
+                    <table class="table table-dark table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">interface</th>
+                            <th scope="col">state</th>
+                        </tr>
+                        </thead>
+                        <tbody id="loopback">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    </div>
+   <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                    port-channel信息
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                <div class="card-body">
+                    <table class="table table-dark table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">interface</th>
+                            <th scope="col">portmode</th>
+                            <th scope="col">proto</th>
+                            <th scope="col">ratemode</th>
+                            <th scope="col">speed</th>
+                            <th scope="col">state</th>
+                            <th scope="col">state_rsn_desc</th>
+                            <th scope="col">type
+                            <th scope="col">vlan</th>
+                        </tr>
+                        </thead>
+                        <tbody id="portChannel">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    </div>
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                    VLAN信息
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+
+                <div class="card-body">
+                    <table class="table table-dark table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">interface</th>
+                            <th scope="col">svi_admin_state</th>
+                            <th scope="col">svi_rsn_desc</th>
+                        </tr>
+                        </thead>
+                        <tbody id="vlan">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+</div>
+
 </body>
 </html>

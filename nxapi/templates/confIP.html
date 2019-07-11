@@ -114,7 +114,7 @@
                         console.log(data);
                         for (i = 0; i < data.length; i++) {
                             if (data[i].interface.substr(0, 1) == "E")
-                                $('#portList').append("<option  value='" + data[i].interface + "'>" + data[i].interface + "</option>")
+                                $('#portList').append("<option  value='" + data[i].interface + "'>" + data[i].interface + "</option>");
                         }
                         $("#serialList").css("display", "block");
                         $("#portList").css("display", "block");
@@ -134,14 +134,46 @@
         var port = $("#portList").find("option:selected").val();
         port = port.toLowerCase();
         var splitData = port.split("ernet");
-        console.log("splitData:"+splitData);
-        var portFinal = splitData.join()
+        console.log("splitData:" + splitData);
+        var portFinal = splitData.join('');
         var ip = $("#ipAddr").val();
-        console.log("serial:"+serialSelected+",port:"+port+",ip"+ip);
+        console.log("serial:" + serialSelected + ",port:" + portFinal + ",ip" + ip);
         var formData = new FormData();
         formData.append("serial", serialSelected);
-        formData.append("eth", port);
+        formData.append("eth", portFinal);
         formData.append("ip", ip);
+        var circle = new Sonic({
+
+            width: 50,
+            height: 50,
+            padding: 50,
+
+            strokeColor: '#000',
+            pointDistance: .01,
+            stepsPerFrame: 3,
+            trailLength: .7,
+
+            step: 'fader',
+
+            setup: function () {
+                this._.lineWidth = 5;
+            },
+
+            path: [
+                ['arc', 25, 25, 25, 0, 360]
+            ]
+
+        });
+
+        circle.play();
+
+        document.body.appendChild(circle.canvas);
+        $("#serialList").css("display", "none");
+        $("#portList").css("display", "none");
+        $("#iplabel").css("display", "none");
+        $("#ipAddr").css("display", "none");
+        $("#submit").css("display", "none");
+        $('canvas').css("margin-left", "50%");
         $.ajax({
             url: "/nxapi/ipConf/",
             type: "POST",
@@ -150,7 +182,18 @@
             contentType: false,
             processData: false,
             success: function (data) {
+                $("#serialList").css("display", "block");
+                $("#portList").css("display", "block");
+                $("#iplabel").css("display", "block");
+                $("#ipAddr").css("display", "block");
+                $("#submit").css("display", "block");
+                $('canvas').remove();
                 console.log(data);
+                if (data === "True") {
+                    alert("配置成功")
+                } else if (data == "False") {
+                    alert("配置失败")
+                }
             }
         })
     }
@@ -176,7 +219,7 @@
                        style="width: 30%;display: inline;float:left;margin-left: 20px;" id="ipAddr"
                        placeholder="例：192.168.1.1/10">
             </div>
-            <br>
+            <br><br>
             <button type="submit" class="btn btn-primary"
                     style="width: 30%;display: inline;float:left;margin-left: 20px;" onclick="confIP()" id="submit">
                 Submit
