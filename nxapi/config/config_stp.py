@@ -134,7 +134,7 @@ class config_stp():
         data = json.loads(response.text)
         return data
 
-    def config_stp_mst_instance(self, instanceid, vlanrange):
+    def config_stp_mst_instance(self, instanceid, vlanrange,priority):
         payload = {
             "topSystem": {
                 "children": [
@@ -151,44 +151,7 @@ class config_stp():
                                                             "stpMstDom": {
                                                                 "attributes": {
                                                                     "id": instanceid,
-                                                                    "vlanRange": vlanrange
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        }
-        config = configbase(self.serial, payload)
-        response = config.send()
-        data = json.loads(response.text)
-        return data
-
-    def config_stp_mst_priority(self, instanceid, priority):
-        payload = {
-            "topSystem": {
-                "children": [
-                    {
-                        "stpEntity": {
-                            "children": [
-                                {
-                                    "stpInst": {
-                                        "children": [
-                                            {
-                                                "stpMstEntity": {
-                                                    "children": [
-                                                        {
-                                                            "stpMstDom": {
-                                                                "attributes": {
-                                                                    "id": instanceid,
+                                                                    "vlanRange": vlanrange,
                                                                     "priority": priority
                                                                 }
                                                             }
@@ -207,8 +170,13 @@ class config_stp():
         }
         config = configbase(self.serial, payload)
         response = config.send()
-        data = json.loads(response.text)
-        return data
+        data = json.loads(response.text)['imdata']
+        if not data:
+            return True
+        else:
+            return False
+
+
 
     def config_stp_mstentity(self,
                              adminSt="1",

@@ -7,7 +7,7 @@ from .query.query_interface import query_interface_all
 from device.models import devicelist
 from nxapi.query.query_mac import query_allmac
 from nxapi.query.query_route import query_route_all
-from .config import config_ip, config_vlan, config_trunk
+from .config import config_ip, config_vlan, config_trunk, config_stp, config_staticroute
 from .query import query_allvlan
 
 
@@ -27,21 +27,22 @@ class routeView(View):
         data = query_route_all(serial)
         return JsonResponse(data, safe=False)
 
+
 class mac(View):
     def get(self, request):
-        serial = "9CNTS3XFTXY"
-        # eth = "Vlan103"
-        eth = "e1/5"
-        data = query_allmac(serial)
-        print("data:", data)
-        data= json.dumps(data)
-        return render(request, "queryMac.html", {"data": data})
+        # serial = "9CNTS3XFTXY"
+        # # eth = "Vlan103"
+        # eth = "e1/5"
+        # data = query_allmac(serial)
+        # print("data:", data)
+        # data = json.dumps(data)
+        return render(request, "queryMac.html", {"data": "data"})
         # return JsonResponse(data, safe=False)
 
     def post(self, request):
-        serial = "9CNTS3XFTXY"
-        eth = "e1/5"
+        serial = str(request.POST["serial"])
         data = query_allmac(serial)
+        print("mac data:", data)
         return JsonResponse(data, safe=False)
 
 
@@ -103,14 +104,24 @@ class ipConf(View):
 
 class vlanView(View):
     def get(self, request):
-        data = query_allvlan.query_vlan("9CNTS3XFTXY")
-        data = json.dumps(data)
-        print("data:", data)
-        return render(request, "queryVlan.html", {"data": data})
+        # serial = str(request.POST["serial"])
+        # data = query_allvlan.query_vlan(serial)
+        # data = json.dumps(data)
+        # print("data:", data)
+        return render(request, "queryVlan.html", {"data": "data"})
 
     def post(self, request):
         serial = str(request.POST["serial"])
         print("Vlan view's serial:", serial)
+        data = query_allvlan.query_vlan(serial)
+        data = json.dumps(data)
+        print("data:", data)
+        return JsonResponse(data, safe=False)
+
+
+class queryVlan(View):
+    def post(self, request):
+        serial = str(request.POST["serial"])
         data = query_allvlan.query_vlan(serial)
         data = json.dumps(data)
         print("data:", data)
@@ -142,4 +153,46 @@ class confTrunk(View):
         configTrunk = config_trunk.Conf_trunk(serial, eth, vlanRange, nativeVlan)
         info = configTrunk.config_trunk()
         print("info:", info)
+        return HttpResponse(info)
+
+
+class confStp(View):
+    def get(self, request):
+        return render(request, "confStp.html", {"test": "test"})
+
+    def post(self, request):
+        serial = str(request.POST["serial"])
+        vlanRange = str(request.POST['vlanRange'])
+        mode = str(request.POST['mode'])
+        name = str(request.POST['name'])
+        revision = str(request.POST['revision'])
+        instanceId = str(request.POST['instanceid'])
+        pripority = str(request.POST['pripority'])
+        config = config_stp.config_stp(serial, "1", mode)
+        config.config_stp_mode()
+        config.config_stp_mst(name, revision)
+        data = config.config_stp_mst_instance(instanceId, vlanRange, pripority)
+        print(data)
+        return HttpResponse(data)
+
+
+class staticRouteView(View):
+    def get(self, request):
+        # serial = "9CNTS3XFTXY"
+        # eth = "Vlan103"
+        eth = "e1/5"
+        # data = query_allmac(serial)
+        # print("data:", data)
+        # data= json.dumps(data)
+        return render(request, "staticRoute.html", {"data": "test"})
+        # return JsonResponse(data, safe=False)
+
+    def post(self, request):
+        serial = str(request.POST["serial"])
+        prefix = str(request.POST["prefix"])
+        nhAddr = str(request.POST["nhAddr"])
+        nhVrf = str(request.POST["nhVrf"])
+        s = config_staticroute.conf_staticroute(serial, prefix, nhAddr, nhVrf)
+        info = s.config_staticroute1()
+        print("静态路由返回的信息：" + str(info))
         return HttpResponse(info)

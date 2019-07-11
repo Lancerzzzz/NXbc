@@ -10,7 +10,99 @@
     {% bootstrap_messages %}
 </head>
 <script>
-    var data = JSON.parse('{{ data|safe }}');
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $(document).ready(
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        }),
+        $.ajax({
+            url: "/nxapi/queryDevice/",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                for (i = 0; i < data['serial'].length; i++) {
+                    $('#serialList').append("<option value='" + data['serial'][i] + "'>" + data['serial'][i] + "</option>")
+                }
+            }
+        }),
+    );
+
+    function split_array(arr, len) {
+        var a_len = arr.length;
+        {#console.log("arr:",arr);#}
+        var result = [];
+        for (var i = 0; i < a_len; i += len) {
+            result.push(arr.slice(i, i + len));
+        }
+        return result;
+    }
+
+    function queryMac() {
+        var serialSelected = $("#serialList").find("option:selected").val();
+        console.log(serialSelected);
+        var formData = new FormData();
+        formData.append("serial", serialSelected);
+        $.ajax({
+            url: "/nxapi/mac/",
+            type: "POST",
+            cache: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                {#data = JSON.parse(data);#}
+                {#console.log(data);#}
+                $("#port").empty();
+                $("#portChannel").empty();
+                $("#vlan").empty();
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].interface.substr(0, 1) == "E")
+                        $('#port').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+                    else if (data[i].interface.substr(0, 1) == "p")
+                        $('#portChannel').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+                    else if (data[i].interface.substr(0, 1) == "V")
+                        $('#vlan').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+                }
+
+            }
+        })
+    }
+
+
+</script>
+<script>
+    /*
+    var data = JSON.parse('');
     $(document).ready(function () {
         for (var i = 0; i < data.length; i++) {
             if (data[i].interface.substr(0, 1) == "E")
@@ -20,9 +112,24 @@
             else if (data[i].interface.substr(0, 1) == "V")
                 $('#vlan').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
         }
-    })
+    })*/
+
 </script>
 <body>
+<form role="form">
+    <div>
+        <div class="form-group">
+            <select class="form-control" id="serialList"
+                    style="width: 30%;display: inline;float:left;margin-left: 20px;">
+                <option value="" disabled selected>设备选择</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-white" style="display: inline;float: left;margin-left: 20px;"
+                onclick="queryMac()">查询
+        </button>
+    </div>
+</form>
+<br><br>
 <div class="accordion" id="accordionExample">
     <div class="card bg-secondary text-white">
         <div class="card-header" id="headingOne">

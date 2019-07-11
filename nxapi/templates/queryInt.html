@@ -71,6 +71,10 @@
             contentType: false,
             processData: false,
             success: function (data) {
+                $('#port').empty();
+                $('#portChannel').empty();
+                $('#vlan').empty();
+                $('#loopback').empty();
                 console.log(data);
                 for (i = 0; i < data.length; i++) {
                     if (data[i].interface.substr(0, 1) == "E")
@@ -85,19 +89,6 @@
             }
         })
     }
-
-    $("#panelT1").click(function () {
-        $("#panelB1").slideToggle("slow");
-    });
-    $("#panelT2").click(function () {
-        $("#panelB2").slideToggle("slow");
-    });
-    $("#panelT3").click(function () {
-        $("#panelB3").slideToggle("slow");
-    });
-    $("#panelT4").click(function () {
-        $("#panelB4").slideToggle("slow");
-    });
 </script>
 <form role="form">
     <div>

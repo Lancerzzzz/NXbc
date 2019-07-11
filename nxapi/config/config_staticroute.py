@@ -13,12 +13,7 @@ class conf_staticroute():
     def __init__(self, serial,
                  prefix="",
                  nhAddr="",
-                 nhIf="",
                  nhVrf="default",
-                 object1=" ",
-                 pref="",
-                 rtname="",
-                 tag=""
                  ):
         """
 
@@ -44,12 +39,7 @@ class conf_staticroute():
         self.serial = serial
         self.prefix = prefix
         self.nhAddr = nhAddr
-        self.nhIf = nhIf
         self.nhVrf = nhVrf
-        self.object1 = object1
-        self.pref = pref
-        self.rtname = rtname
-        self.tag = tag
         self.payload = {
             "topSystem": {
                 "children": [
@@ -75,12 +65,9 @@ class conf_staticroute():
                                                                         "ipv4Nexthop": {
                                                                             "attributes": {
                                                                                 "nhAddr": nhAddr,
-                                                                                "nhIf": nhIf,
                                                                                 "nhVrf": nhVrf,
-                                                                                "object": object1,
-                                                                                "pref": pref,
-                                                                                "rtname": rtname,
-                                                                                "tag": tag
+                                                                                "nhIf": "unspecified",
+                                                                                "object" : "0"
                                                                             }
                                                                         }
                                                                     }
@@ -126,12 +113,7 @@ class conf_staticroute():
                                                                         "ipv4Nexthop": {
                                                                             "attributes": {
                                                                                 "nhAddr": self.nhAddr,
-                                                                                "nhIf": self.nhIf,
                                                                                 "nhVrf": self.nhVrf,
-                                                                                "object": self.object1,
-                                                                                "pref": self.pref,
-                                                                                "rtname": self.rtname,
-                                                                                "tag": self.tag
                                                                             }
                                                                         }
                                                                     }
@@ -150,7 +132,10 @@ class conf_staticroute():
                 ]
             }
         }
-        config = configbase(self.serial, payload)
+        config = configbase(self.serial, self.payload)
         response = config.send()
-        data = json.loads(response.text)
-        return data
+        data = json.loads(response.text)["imdata"]
+        if not data:
+            return True
+        else:
+            return False

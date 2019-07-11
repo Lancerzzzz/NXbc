@@ -33,10 +33,16 @@
         $("#item").attr("src", '/nxapi/queryRoute');
     }
     function queryVlan() {
-        $("#item").attr("src", '/nxapi/queryVlan');
+        $("#item").attr("src", '/nxapi/vlanView');
     }
     function accessConfigView() {
         $("#item").attr("src", '/nxapi/accessConfigView');
+    }
+    function confStp() {
+        $("#item").attr("src", '/nxapi/confStp');
+    }
+    function staticRoute() {
+         $("#item").attr("src", '/nxapi/staticRoute');
     }
 </script>
 <body>
@@ -58,9 +64,9 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="#" onclick="accessConfigView()">Access</a>
         <a class="dropdown-item" href="#" onclick="confTrunk()">Trunk</a>
-        <a class="dropdown-item" href="#">Spanning-tree</a>
+        <a class="dropdown-item" href="#" onclick="confStp()">Spanning-tree</a>
         <a class="dropdown-item" href="#" onclick="confIP()">IPV4</a>
-        <a class="dropdown-item" href="#">静态路由</a>
+        <a class="dropdown-item" href="#" onclick="staticRoute()">静态路由</a>
       </div>
     </li>
 

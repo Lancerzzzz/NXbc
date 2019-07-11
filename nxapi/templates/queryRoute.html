@@ -71,6 +71,7 @@
             contentType: false,
             processData: false,
             success: function (data) {
+                 $("#accordionExample").empty();
                 for (var i = 0; i < data.length; i++) {
                     $("#accordionExample").append('<div class="card bg-secondary text-white"> <div class="card-header" id="headingOne"> <h2 class="mb-0">' +
                         ' <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne' + i + '"aria-expanded="false" aria-controls="collapseOne' + i + '">' + data[i]["vrf-name-out"] +
