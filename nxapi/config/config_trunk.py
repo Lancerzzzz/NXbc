@@ -10,7 +10,6 @@ import json
 class Conf_trunk():
     def __init__(self, serial,
                  id="e1/1",
-                 mode="1",
                  trunkVlans="1-4094",
                  nativeVlan="vlan-1"
                  ):
@@ -37,7 +36,6 @@ class Conf_trunk():
         """
         self.serial = serial
         self.id = id
-        self.mode = mode
         self.trunkVlans = trunkVlans
         self.nativeVlan = nativeVlan
         self.payload = {
@@ -50,7 +48,7 @@ class Conf_trunk():
                                     "l1PhysIf": {
                                         "attributes": {
                                             "id": id,
-                                            "mode": mode,
+                                            "mode": "2",
                                             "trunkVlans": trunkVlans,
                                             "nativeVlan": nativeVlan
                                         }
@@ -74,7 +72,7 @@ class Conf_trunk():
                                     "l1PhysIf": {
                                         "attributes": {
                                             "id": self.id,
-                                            "mode": self.mode,
+                                            "mode": "2",
                                             "trunkVlans": self.trunkVlans,
                                             "nativeVlan": self.nativeVlan
                                         }
@@ -89,4 +87,8 @@ class Conf_trunk():
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        print("data:", data)
+        if not data:
+            return True
+        else:
+            return False

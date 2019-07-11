@@ -9,11 +9,107 @@
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
 </head>
+<script>
+    var data = JSON.parse('{{ data|safe }}');
+    $(document).ready(function () {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].interface.substr(0, 1) == "E")
+                $('#port').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+            else if (data[i].interface.substr(0, 1) == "p")
+                $('#portChannel').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+            else if (data[i].interface.substr(0, 1) == "V")
+                $('#vlan').append("<tr><td>" + data[i].interface + "</td><td>" + data[i].address + "</td><td>" + data[i]['bia_address'] + "</td></tr>");
+        }
+    })
+</script>
 <body>
-<div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
+<div class="accordion" id="accordionExample">
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    port-channel Mac信息
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <table class="table table-dark table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">interface</th>
+                        <th scope="col">address</th>
+                        <th scope="col">bia_address</th>
+                    </tr>
+                    </thead>
+                    <tbody id="portChannel">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
+
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                    SVI Mac信息
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+            <div class="card-body">
+                <table class="table table-dark table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">interface</th>
+                        <th scope="col">address</th>
+                        <th scope="col">bia_address</th>
+                    </tr>
+                    </thead>
+                    <tbody id="vlan">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="card bg-secondary text-white">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                    以太网接口 Mac信息
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+
+            <div class="card-body">
+                <table class="table table-dark table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">interface</th>
+                        <th scope="col">address</th>
+                        <th scope="col">bia_address</th>
+                    </tr>
+                    </thead>
+                    <tbody id="port">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

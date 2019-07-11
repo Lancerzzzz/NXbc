@@ -9,5 +9,9 @@ urlpatterns = [
     path('queryInterface/', views.queryInterface.as_view(), name='queryInterface'),
     path('ipView/', views.ipView.as_view(), name='ipVIew'),
     path('ipConf/', views.ipConf.as_view(), name="confIP"),
-    path('queryVlan/', views.vlanView.as_view(), name="queryVlan")
+    path('queryVlan/', views.vlanView.as_view(), name="queryVlan"),
+    path('accessConfigView/', views.accessConfigView.as_view(), name="accessConfigView"),
+    path('confTrunk/', views.confTrunk.as_view(), name="confTrunk"),
+    path('queryMac/', views.mac.as_view(), name="queryMac"),
+    path('queryRoute/', views.routeView.as_view(), name="queryRoute"),
 ]

@@ -23,6 +23,21 @@
     function confIP() {
         $("#item").attr("src", '/nxapi/ipView/');
     }
+    function confTrunk() {
+        $("#item").attr("src", '/nxapi/confTrunk');
+    }
+    function queryMac() {
+        $("#item").attr("src", '/nxapi/queryMac');
+    }
+    function queryRoute() {
+        $("#item").attr("src", '/nxapi/queryRoute');
+    }
+    function queryVlan() {
+        $("#item").attr("src", '/nxapi/queryVlan');
+    }
+    function accessConfigView() {
+        $("#item").attr("src", '/nxapi/accessConfigView');
+    }
 </script>
 <body>
 
@@ -41,10 +56,9 @@
        设备配置
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Access</a>
-        <a class="dropdown-item" href="#">Trunk</a>
+        <a class="dropdown-item" href="#" onclick="accessConfigView()">Access</a>
+        <a class="dropdown-item" href="#" onclick="confTrunk()">Trunk</a>
         <a class="dropdown-item" href="#">Spanning-tree</a>
-        <a class="dropdown-item" href="#">DHCP中继</a>
         <a class="dropdown-item" href="#" onclick="confIP()">IPV4</a>
         <a class="dropdown-item" href="#">静态路由</a>
       </div>
@@ -56,10 +70,10 @@
         信息查询
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">MAC表</a>
-        <a class="dropdown-item" href="#">路由表</a>
+        <a class="dropdown-item" href="#" onclick="queryMac()">MAC表</a>
+        <a class="dropdown-item" href="#" onclick="queryRoute()">路由表</a>
         <a class="dropdown-item" href="#" onclick="interface()">接口信息</a>
-        <a class="dropdown-item" href="#">VLAN信息</a>
+        <a class="dropdown-item" href="#" onclick="queryVlan()">VLAN信息</a>
       </div>
     </li>
       <li class="nav-item">

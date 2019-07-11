@@ -5,32 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b9f9af7-b808-4f64-982d-7474c172d298" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nxapi/templates/queryVlan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NXbc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NXbc.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/78a0c305-ac12-44bf-a2c9-e1449ee12b14.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nxapi/templates/accessVlan.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nxapi/templates/confTrunk.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nxapi/templates/queryRoute.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/templates/deviceList.html" beforeDir="false" afterPath="$PROJECT_DIR$/device/templates/deviceList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nxapi/config/config_ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/config/config_ip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nxapi/config/config_trunk.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/config/config_trunk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nxapi/config/config_vlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/config/config_vlan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nxapi/query/query_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/query/query_route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nxapi/templates/confIP.html" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/templates/confIP.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nxapi/templates/queryInt.html" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/templates/queryInt.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nxapi/templates/queryMac.html" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/templates/queryMac.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nxapi/templates/queryVlan.html" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/templates/queryVlan.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nxapi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nxapi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxapi/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nxbc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxbc/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nxbc/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/nxbc/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/tasks.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/views.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nxapi/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="87" column="59" lean-forward="true" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+            <state relative-caret-position="190">
+              <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -72,20 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nxapi/templates/queryVlan.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nxapi/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="66" lean-forward="true" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+            <state relative-caret-position="228">
+              <caret line="12" column="26" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="26" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -94,31 +76,83 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxapi/templates/queryMac.html">
+        <entry file="file://$PROJECT_DIR$/home/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="50" lean-forward="true" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+            <state relative-caret-position="246">
+              <caret line="60" column="59" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxbc/urls.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nxapi/config/config_stp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+            <state relative-caret-position="137">
+              <caret line="136" column="46" lean-forward="true" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
               <folding>
-                <element signature="e#628#660#0" expanded="true" />
+                <element signature="e#506#2363#0" />
+                <element signature="e#2404#3252#0" />
+                <element signature="e#3311#4475#0" />
+                <element signature="e#4547#6137#0" />
+                <element signature="e#6208#7796#0" />
+                <element signature="e#8208#11044#0" />
+                <element signature="e#8208#9257#1" />
+                <element signature="e#11464#13521#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxapi/query/query_interface.py">
+        <entry file="file://$PROJECT_DIR$/device/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+            <state relative-caret-position="304">
+              <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+              <folding>
+                <element signature="e#113#145#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/device/templates/deviceList.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/home/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+              <folding>
+                <element signature="e#113#145#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nxapi/query/query_mac.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="19" column="17" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nxapi/query/query_route.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -129,38 +163,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nxapi/config/config_trunk.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxapi/config/config_vlan.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxapi/query/query_allvlan.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#127#171#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nxapi/templates/queryInt.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1015">
-              <caret line="123" column="25" lean-forward="true" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
+            <state relative-caret-position="855">
+              <caret line="52" column="68" lean-forward="true" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -179,6 +183,7 @@
     <findStrings>
       <find>static</find>
       <find>template</find>
+      <find>device</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,10 +210,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/device/templates/home.html" />
-        <option value="$PROJECT_DIR$/device/templates/deviceList.html" />
-        <option value="$PROJECT_DIR$/home/templates/home.html" />
-        <option value="$PROJECT_DIR$/celery/models.py" />
         <option value="$PROJECT_DIR$/celery/task.py" />
         <option value="$PROJECT_DIR$/task/task.py" />
         <option value="$PROJECT_DIR$/task/views.py" />
@@ -221,7 +222,6 @@
         <option value="$PROJECT_DIR$/nxapi/query/query_l3ipif.py" />
         <option value="$PROJECT_DIR$/nxapi/query/query_stp.py" />
         <option value="$PROJECT_DIR$/nxapi/config_base/config_base.py" />
-        <option value="$PROJECT_DIR$/nxapi/config/config_stp.py" />
         <option value="$PROJECT_DIR$/nxapi/config/config_vtp.py" />
         <option value="$PROJECT_DIR$/nxapi/config/config_dhcp.py" />
         <option value="$PROJECT_DIR$/nxapi/cli_base/cli_base.py" />
@@ -232,11 +232,8 @@
         <option value="$PROJECT_DIR$/nxapi/query/query_intrun.py" />
         <option value="$PROJECT_DIR$/nxapi/query/query_ip.py" />
         <option value="$PROJECT_DIR$/nxapi/query/query_mac.py" />
-        <option value="$PROJECT_DIR$/nxapi/query/query_route.py" />
         <option value="$PROJECT_DIR$/nxapi/query/query_unicastrouting.py" />
         <option value="$PROJECT_DIR$/task/models.py" />
-        <option value="$PROJECT_DIR$/device/views.py" />
-        <option value="$PROJECT_DIR$/device/urls.py" />
         <option value="$PROJECT_DIR$/home/urls.py" />
         <option value="$PROJECT_DIR$/home/views.py" />
         <option value="$PROJECT_DIR$/jinja2_env.py" />
@@ -245,17 +242,25 @@
         <option value="$PROJECT_DIR$/nxapi/template/queryMac.html" />
         <option value="$PROJECT_DIR$/nxapi/templates/queryMac.html" />
         <option value="$PROJECT_DIR$/nxapi/query/query_interface.py" />
-        <option value="$PROJECT_DIR$/nxapi/config/config_trunk.py" />
         <option value="$PROJECT_DIR$/nxbc/urls.py" />
         <option value="$PROJECT_DIR$/nxapi/config/config_ip.py" />
         <option value="$PROJECT_DIR$/nxbc/settings.py" />
-        <option value="$PROJECT_DIR$/nxapi/templates/confIP.html" />
-        <option value="$PROJECT_DIR$/nxapi/config/config_vlan.py" />
-        <option value="$PROJECT_DIR$/nxapi/urls.py" />
         <option value="$PROJECT_DIR$/nxapi/query/query_allvlan.py" />
         <option value="$PROJECT_DIR$/nxapi/templates/queryInt.html" />
-        <option value="$PROJECT_DIR$/nxapi/views.py" />
         <option value="$PROJECT_DIR$/nxapi/templates/queryVlan.html" />
+        <option value="$PROJECT_DIR$/nxapi/config/config_vlan.py" />
+        <option value="$PROJECT_DIR$/nxapi/templates/confIP.html" />
+        <option value="$PROJECT_DIR$/nxapi/templates/accessVlan.html" />
+        <option value="$PROJECT_DIR$/nxapi/config/config_trunk.py" />
+        <option value="$PROJECT_DIR$/nxapi/templates/confTrunk.html" />
+        <option value="$PROJECT_DIR$/device/views.py" />
+        <option value="$PROJECT_DIR$/device/urls.py" />
+        <option value="$PROJECT_DIR$/device/templates/deviceList.html" />
+        <option value="$PROJECT_DIR$/nxapi/urls.py" />
+        <option value="$PROJECT_DIR$/nxapi/query/query_route.py" />
+        <option value="$PROJECT_DIR$/nxapi/views.py" />
+        <option value="$PROJECT_DIR$/home/templates/home.html" />
+        <option value="$PROJECT_DIR$/nxapi/config/config_stp.py" />
       </list>
     </option>
   </component>
@@ -368,18 +373,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/home" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/nxapi/templates" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xzl52\items\sdn\NXbc\nxapi\templates" />
+      <recent name="C:\Users\xzl52\items\sdn\NXbc\home" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\xzl52\items\sdn\NXbc\nxbc" />
       <recent name="C:\Users\xzl52\items\sdn\NXbc\home\static" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xzl52\items\sdn\NXbc\home" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -485,12 +491,12 @@
       <workItem from="1562673437998" duration="141000" />
       <workItem from="1562673616378" duration="4161000" />
       <workItem from="1562776258467" duration="2686000" />
-      <workItem from="1562810070997" duration="1085000" />
+      <workItem from="1562810070997" duration="18112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82968000" />
+    <option name="totallyTimeSpent" value="99995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -510,7 +516,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.5044843" side_tool="true" weight="0.24731903" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34844193" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3385269" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -588,31 +594,6 @@
     <SUITE FILE_PATH="coverage/NXbc$query_interface.coverage" NAME="query_interface Coverage Results" MODIFIED="1561709033841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/nxapi/query" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../env/venv/Lib/site-packages/vine/five.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="315" column="25" selection-start-line="315" selection-start-column="25" selection-end-line="315" selection-end-column="25" />
-          <folding>
-            <element signature="e#141#197#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/django_celery_results/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../env/venv/Lib/site-packages/django_celery_results/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task/views.py" />
     <entry file="file://$PROJECT_DIR$/../env/venv/Lib/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -705,42 +686,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/device/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-          <folding>
-            <element signature="e#113#145#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/device/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1102">
-          <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="e#113#145#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -755,34 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_mac.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_ip.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_route.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nxapi/query/query_l3ipif.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -791,18 +714,6 @@
             <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_intrun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/config/config_stp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1482" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nxapi/config/config_staticroute.py">
@@ -829,22 +740,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/device/templates/deviceList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/devicemn/devicemn.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -853,63 +750,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/templates/confIP.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3648">
-          <caret line="192" column="33" selection-start-line="192" selection-start-column="33" selection-end-line="192" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/config/config_ip.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nxapi/config/config_vtp.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/config/config_trunk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/config/config_vlan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/query/query_allvlan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#127#171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryMac.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="50" lean-forward="true" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nxbc/urls.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -921,37 +763,232 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/urls.py">
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryInt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="82" column="116" lean-forward="true" selection-start-line="82" selection-start-column="116" selection-end-line="82" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_ip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/config/config_ip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="76" column="24" lean-forward="true" selection-start-line="73" selection-start-column="7" selection-end-line="76" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/confIP.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="222" column="58" selection-start-line="222" selection-start-column="58" selection-end-line="222" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/config/config_vlan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="92" column="24" lean-forward="true" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+          <folding>
+            <element signature="e#125#177#0" expanded="true" />
+            <element signature="e#2663#3480#0" />
+            <element signature="e#3537#4358#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryVlan.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="48" column="19" lean-forward="true" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/accessVlan.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1737">
+          <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#1;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#2;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/confTrunk.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="163" column="49" selection-start-line="163" selection-start-column="49" selection-end-line="163" selection-end-column="49" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#1;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#2;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#2;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/device/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryMac.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1616">
+          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryRoute.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1991" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_allvlan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#127#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_intrun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_mac.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/query/query_route.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="66" lean-forward="true" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nxapi/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="87" column="59" lean-forward="true" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+        <state relative-caret-position="190">
+          <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryInt.html">
+    <entry file="file://$PROJECT_DIR$/nxapi/config/config_trunk.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1015">
-          <caret line="123" column="25" lean-forward="true" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
+        <state relative-caret-position="855">
+          <caret line="52" column="68" lean-forward="true" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nxapi/templates/queryVlan.html">
+    <entry file="file://$PROJECT_DIR$/device/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding>
+            <element signature="e#113#145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="e#113#145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/device/templates/deviceList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="143" column="7" selection-start-line="143" selection-start-column="7" selection-end-line="143" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="60" column="59" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nxapi/config/config_stp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="136" column="46" lean-forward="true" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
+          <folding>
+            <element signature="e#506#2363#0" />
+            <element signature="e#2404#3252#0" />
+            <element signature="e#3311#4475#0" />
+            <element signature="e#4547#6137#0" />
+            <element signature="e#6208#7796#0" />
+            <element signature="e#8208#11044#0" />
+            <element signature="e#8208#9257#1" />
+            <element signature="e#11464#13521#0" />
+          </folding>
         </state>
       </provider>
     </entry>

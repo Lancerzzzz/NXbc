@@ -10,12 +10,40 @@
     {% bootstrap_messages %}
 </head>
 <script>
-    {#var data = {{ data }}#}
-    {#console.log(data)#}
+    function split_array(arr, len) {
+        var a_len = arr.length;
+        {#console.log("arr:",arr);#}
+        var result = [];
+        for (var i = 0; i < a_len; i += len) {
+            result.push(arr.slice(i, i + len));
+        }
+        return result;
+    }
+
+    $(function () {
+        var data = JSON.parse('{{ data|safe }}');
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            console.log("data[i]['vlanshowbr-vlanid']:" + data[i]['vlanshowbr-vlanid']);
+            $('#info').append("<tr><td>" + data[i]['vlanshowbr-vlanid'] + "</td><td>" + data[i]['vlanshowbr-vlanname'] + "</td><td id='" + i + "' style=\"word-wrap:break-word;\"><p>"+data[i]['vlanshowplist-ifidx']+"</p></td></tr>");
+            /*
+            for (var j = 0; j < data[i]['vlanshowplist-ifidx'].length; j++) {
+                var id = '#' + i;
+                //var ports = [data[i]['vlanshowplist-ifidx'][j]];
+                //console.log("ports:"+ports);
+                //var vlanPorts = split_array(data[i]['vlanshowplist-ifidx'][j]);
+                //console.log("vlanPorts:",vlanPorts);
+                for(var t=0;t<data[i]['vlanshowplist-ifidx'][j].length;t++){
+                    $(id).append(data[i]['vlanshowplist-ifidx'][j][t] + "<br>");
+                }
+            }*/
+        }
+    })
+
 </script>
 <body>
 {#{{ data }}#}
-<table class="table table-dark table-striped">
+<table class="table table-dark table-striped" style="table-layout:fixed;">
     <thead>
     <tr>
         <th>ID</th>
@@ -23,22 +51,7 @@
         <th>PORTS</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-    </tr>
-    <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-    </tr>
-    <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-    </tr>
+    <tbody id="info">
     </tbody>
 </table>
 </body>

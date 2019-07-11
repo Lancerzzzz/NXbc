@@ -86,7 +86,11 @@ class config_vlan():
         config = configbase(self.serial, payload)
         response = config.send()
         data = json.loads(response.text)['imdata']
-        return data
+        print("data:", data)
+        if not data:
+            return True
+        else:
+            return False
 
     def creat_ifvlan(self, fabEncap, name):
         payload = {

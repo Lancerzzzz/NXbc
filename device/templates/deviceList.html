@@ -8,36 +8,137 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $(document).ready(
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        })
+    );
+
+    function addDevice() {
+        var name = $("#recipient-name").val();
+        var pass = $("#recipient-pass").val();
+        var url = $("#recipient-url").val();
+        if (!name || !pass || !url) {
+            $("#wrongs").text("名字，密码，url不能为空");
+        } else {
+            $("#wrongs").text("");
+            var formData = new FormData();
+            formData.append("username", name);
+            formData.append("passwd", pass);
+            formData.append("url", url);
+            $.ajax({
+                url: "/device/deviceView/",
+                type: "POST",
+                data:formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                    window.location.reload();
+                }
+            }),
+                $('#exampleModal').modal('hide');
+        }
+    }
+</script>
 <body>
 
 <center>
-<!--<h1>test infomation</h1>-->
-<!--    {{ delist }}-->
+    <!--<h1>test infomation</h1>-->
+    <!--    {{ delist }}-->
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">name</th>
-      <th scope="col">passwd</th>
-      <th scope="col">url</th>
-        <th scope="col">systemUptime</th>
-      <th scope="col">serial</th>
-      <th scope="col">status</th>
-      <th scope="col">dn</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for i in delist %}
+    <table class="table">
+        <thead class="thead-dark">
         <tr>
-       {% for j in i.values %}
-                <td>{{ j }}</td>
-        {% endfor %}
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">passwd</th>
+            <th scope="col">url</th>
+            <th scope="col">systemUptime</th>
+            <th scope="col">serial</th>
+            <th scope="col">status</th>
+            <th scope="col">dn</th>
         </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for i in delist %}
+            <tr>
+                {% for j in i.values %}
+                    <td>{{ j }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">添加设备</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">添加设备</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group" style="text-align: left">
+                            <label for="recipient-name" class="col-form-label">设备用户名:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group" style="text-align: left">
+                            <label for="recipient-pass" class="col-form-label">设备密码:</label>
+                            <input type="text" class="form-control" id="recipient-pass">
+                        </div>
+                        <div class="form-group" style="text-align: left">
+                            <label for="recipient-url" class="col-form-label">设备URL:</label>
+                            <input type="text" class="form-control" id="recipient-url">
+                        </div>
+
+                    </form>
+                    <span id="wrongs" style="color: red"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="addDevice()">添加</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </center>
+
 </body>
 </html>

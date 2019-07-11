@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IP 配置</title>
+    <title>Access VLAN</title>
     {% load staticfiles %}
     {% load bootstrap4 %}
     {% bootstrap_css %}
@@ -10,7 +10,6 @@
     {% bootstrap_messages %}
     <script src="{% static 'js/sonic.js' %}"></script>
 </head>
-
 {% csrf_token %}
 <script>
 
@@ -100,8 +99,7 @@
                 formData.append("serial", serialSelected);
                 $("#serialList").css("display", "none");
                 $("#portList").css("display", "none");
-                $("#iplabel").css("display", "none");
-                $("#ipAddr").css("display", "none");
+                $("#vlanList").css("display", "none");
                 $("#submit").css("display", "none");
                 $.ajax({
                     url: "/nxapi/queryInterface/",
@@ -116,32 +114,45 @@
                             if (data[i].interface.substr(0, 1) == "E")
                                 $('#portList').append("<option  value='" + data[i].interface + "'>" + data[i].interface + "</option>");
                         }
+                    }
+                });
+                $.ajax({
+                    url: "/nxapi/queryVlan/",
+                    type: "POST",
+                    cache: false,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data);
+                        for (i = 0; i < data.length; i++) {
+                            $('#vlanList').append("<option  value='" + data[i]['vlanshowbr-vlanid'] + "'>" + data[i]['vlanshowbr-vlanid'] + "</option>");
+                        }
                         $("#serialList").css("display", "block");
                         $("#portList").css("display", "block");
-                        $("#iplabel").css("display", "block");
-                        $("#ipAddr").css("display", "block");
+                        $("#vlanList").css("display", "block");
                         $("#submit").css("display", "block");
                         $('canvas').remove();
-                        {#continueDo();#}
                     }
                 })
             }
         });
     });
 
-    function confIP() {
+    function accessVlan() {
         var serialSelected = $("#serialList").find("option:selected").val();
         var port = $("#portList").find("option:selected").val();
         port = port.toLowerCase();
-        var splitData = port.split("ernet");
-        console.log("splitData:" + splitData);
-        var portFinal = splitData.join('');
-        var ip = $("#ipAddr").val();
-        console.log("serial:" + serialSelected + ",port:" + portFinal + ",ip" + ip);
+        var splitData1 = port.split("ernet");
+        console.log("splitData:" + splitData1);
+        var portFinal = splitData1.join('');
+        var vlan = $("#vlanList").find("option:selected").val();
+        console.log("serial:" + serialSelected + ",port:" + portFinal + ",vlan" + vlan);
         var formData = new FormData();
         formData.append("serial", serialSelected);
         formData.append("eth", portFinal);
-        formData.append("ip", ip);
+        formData.append("vlan", "vlan-"+vlan);
         var circle = new Sonic({
 
             width: 50,
@@ -170,12 +181,11 @@
         document.body.appendChild(circle.canvas);
         $("#serialList").css("display", "none");
         $("#portList").css("display", "none");
-        $("#iplabel").css("display", "none");
-        $("#ipAddr").css("display", "none");
+        $("#vlanList").css("display", "none");
         $("#submit").css("display", "none");
         $('canvas').css("margin-left", "50%");
         $.ajax({
-            url: "/nxapi/ipConf/",
+            url: "/nxapi/accessConfigView/",
             type: "POST",
             cache: false,
             data: formData,
@@ -184,8 +194,7 @@
             success: function (data) {
                 $("#serialList").css("display", "block");
                 $("#portList").css("display", "block");
-                $("#iplabel").css("display", "block");
-                $("#ipAddr").css("display", "block");
+                $("#vlanList").css("display", "block");
                 $("#submit").css("display", "block");
                 $('canvas').remove();
                 console.log(data);
@@ -199,7 +208,6 @@
     }
 </script>
 <body>
-<br>
 <form role="form" onsubmit="return false" style="margin-left: 36%">
     <div>
         <div class="form-group">
@@ -213,15 +221,13 @@
                 <option value="" disabled selected>端口选择（请先选择设备）</option>
             </select>
             <br><br>
-            <div class="form-group">
-                <label for="ipAddr" id="iplabel"></label>
-                <input type="text" class="form-control"
-                       style="width: 30%;display: inline;float:left;margin-left: 20px;" id="ipAddr"
-                       placeholder="例：192.168.1.1/10">
-            </div>
+            <select class="form-control" id="vlanList"
+                    style="width: 30%;display: inline;float:left;margin-left: 20px;">
+                <option value="" disabled selected>VLAN选择（请先选择设备）</option>
+            </select>
             <br><br>
             <button type="submit" class="btn btn-secondary"
-                    style="width: 30%;display: inline;float:left;margin-left: 20px;" onclick="confIP()" id="submit">
+                    style="width: 30%;display: inline;float:left;margin-left: 20px;" onclick="accessVlan()" id="submit">
                 Submit
             </button>
         </div>

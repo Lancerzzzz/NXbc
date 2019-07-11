@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取接口信息</title>
+    {% load staticfiles %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+</head>
+<body>
+{% csrf_token %}
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $(document).ready(
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        }),
+        $.ajax({
+            url: "/nxapi/queryDevice/",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                for (i = 0; i < data['serial'].length; i++) {
+                    $('#serialList').append("<option value='" + data['serial'][i] + "'>" + data['serial'][i] + "</option>")
+                }
+            }
+        }),
+    );
+
+    function queryInterface() {
+        var serialSelected = $("#serialList").find("option:selected").val();
+        console.log(serialSelected);
+        var formData = new FormData();
+        formData.append("serial", serialSelected);
+        $.ajax({
+            url: "/nxapi/queryRoute/",
+            type: "POST",
+            cache: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#accordionExample").append('<div class="card bg-secondary text-white"> <div class="card-header" id="headingOne"> <h2 class="mb-0">' +
+                        ' <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne' + i + '"aria-expanded="false" aria-controls="collapseOne' + i + '">' + data[i]["vrf-name-out"] +
+                        ' </button> </h2> </div> <div id="collapseOne' + i + '" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordionExample">' +
+                        '<div class="card-body"> <table class="table table-dark table-striped"> <thead class="thead-dark"> <tr> <th scope="col">目标网络</th> ' +
+                        '<th scope="col">下一跳地址</th> <th scope="col">本地出接口</th> <th scope="col">路由来源</th> </tr> </thead> <tbody id="port' + i + '"> ' +
+                        '</tbody> </table> </div> </div> </div>');
+                    for (var j = 0; j < data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix.length; j++) {
+                        if (data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path instanceof Array) {
+                            for (var k = 0; k < data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path.length; k++)
+                                $("#port" + i).append("<tr><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].ipprefix + "</td><td>" +
+                                    data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path[k].ipnexthop + "</td><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path[k].ifname
+                                    + "</td><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path[k].clientname + "</td></tr>");
+                        } else {
+                            $("#port" + i).append("<tr><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].ipprefix + "</td><td>" +
+                                data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path.ipnexthop + "</td><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path.ifname
+                                + "</td><td>" + data[i].TABLE_addrf.ROW_addrf.TABLE_prefix.ROW_prefix[j].TABLE_path.ROW_path.clientname + "</td></tr>");
+                        }
+                    }
+
+
+                }
+            }
+        })
+    }
+
+</script>
+<form role="form">
+    <div>
+        <div class="form-group">
+            <select class="form-control" id="serialList"
+                    style="width: 30%;display: inline;float:left;margin-left: 20px;">
+                <option value="" disabled selected>设备选择</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-white" style="display: inline;float: left;margin-left: 20px;"
+                onclick="queryInterface()">查询
+        </button>
+    </div>
+</form>
+
+<br><br><br>
+<div class="accordion" id="accordionExample">
+
+</div>
+
+</body>
+</html>
