@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>staticRoute</title>
+    {% load staticfiles %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    <script src="{% static 'js/sonic.js' %}"></script>
+</head>
+{% csrf_token %}
+<script>
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $(document).ready(
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        }),
+        $.ajax({
+            url: "/nxapi/queryDevice/",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                for (i = 0; i < data['serial'].length; i++) {
+                    $('#serialList').append("<option value='" + data['serial'][i] + "'>" + data['serial'][i] + "</option>");
+
+                }
+
+
+            }
+        }),
+    );
+    $(function () {
+        //监听select
+        $('#serialList').bind('input propertychange', function () {
+            {#$('#serialList').html($(this).val().length);#}
+            if ($('#serialList option:selected').val() != '') {
+                var serialSelected = $("#serialList").find("option:selected").val();
+                console.log(serialSelected);
+                var circle = new Sonic({
+
+                    width: 50,
+                    height: 50,
+                    padding: 50,
+
+                    strokeColor: '#000',
+                    pointDistance: .01,
+                    stepsPerFrame: 3,
+                    trailLength: .7,
+
+                    step: 'fader',
+
+                    setup: function () {
+                        this._.lineWidth = 5;
+                    },
+
+                    path: [
+                        ['arc', 25, 25, 25, 0, 360]
+                    ]
+
+                });
+
+                circle.play();
+
+                document.body.appendChild(circle.canvas);
+                $('canvas').css("margin-left", "50%");
+                var formData = new FormData();
+                formData.append("serial", serialSelected);
+                $("#all").css("display", "none");
+                $.ajax({
+                    url: "/nxapi/queryRoute/",
+                    type: "POST",
+                    cache: false,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        for (i = 0; i < data.length; i++) {
+
+                                $('#VRF').append("<option  value='" + data[i]["vrf-name-out"] + "'>" + data[i]["vrf-name-out"] + "</option>");
+                        }
+                        $("#all").css("display", "block");
+                        $('canvas').remove();
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        });
+    });
+
+    function staticRoute() {
+        var serialSelected = $("#serialList").find("option:selected").val();
+        var VRF = $("#VRF").find("option:selected").val();
+        var url = $("#url").val();
+        var next=$("#next").val();
+        var formData = new FormData();
+        formData.append("serial", serialSelected);
+        formData.append("prefix", url);
+        formData.append("nhAddr", next);
+        formData.append("nhVrf", VRF);
+        var circle = new Sonic({
+
+            width: 50,
+            height: 50,
+            padding: 50,
+
+            strokeColor: '#000',
+            pointDistance: .01,
+            stepsPerFrame: 3,
+            trailLength: .7,
+
+            step: 'fader',
+
+            setup: function () {
+                this._.lineWidth = 5;
+            },
+
+            path: [
+                ['arc', 25, 25, 25, 0, 360]
+            ]
+
+        });
+
+        circle.play();
+
+        document.body.appendChild(circle.canvas);
+        $("#all").css("display", "none");
+
+        $('canvas').css("margin-left", "50%");
+        $.ajax({
+            url: "/nxapi/staticRoute/",
+            type: "POST",
+            cache: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data)
+                $("#all").css("display", "block");
+                $('canvas').remove();
+                if (data === "True") {
+                    alert("配置成功")
+                } else if (data == "False") {
+                    alert("配置失败")
+                }
+            }
+        })
+    }
+</script>
+<body>
+<div style="margin: 0 auto;background-color:rgba(255,255,255,0.3); width: 50%;" id="all">
+    <form  onsubmit="return false">
+        <div class="form-group">
+            <label for="serialList">设备选择</label>
+            <select class="form-control" id="serialList">
+                <option value="" disabled selected>请选择</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="url">去往的目标网络:</label>
+            <input class="form-control" id="url" placeholder="192.168.1.0/24">
+        </div>
+        <div class="form-group">
+            <label for="next">下一跳的IP地址:</label>
+            <input  class="form-control" id="next" placeholder="172.10.1.5">
+        </div>
+        <div class="form-group">
+            <label for="VRF">VRF选择</label>
+            <select class="form-control" id="VRF">
+                <option value="" disabled selected>请选择</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="staticRoute()" id="submit">
+            Submit
+        </button>
+    </form>
+    {#    <form role="form" onsubmit="return false" style="margin-left: 36%">#}
+    {#        <div>#}
+    {#            <div class="form-group">#}
+    {#                <select class="form-control" id="serialList"#}
+    {#                        style="width: 30%;display: inline;float:left;margin-left: 20px;">#}
+    {#                    <option value="" disabled selected>设备选择</option>#}
+    {#                </select>#}
+    {#                <br><br>#}
+    {#                <label for="recipient-url" class="col-form-label">去往的目标网络:</label>#}
+    {#                <input type="text" class="form-control" id="recipient-url">#}
+    {#                <br><br>#}
+    {#                <br><br>#}
+    {#                <label for="recipient-nexturl" class="col-form-label">下一跳的IP地址:</label>#}
+    {#                <input type="text" class="form-control" id="recipient-nexturl">#}
+    {#                <br><br>#}
+    {#                <select class="form-control" id="VRF"#}
+    {#                        style="width: 30%;display: inline;float:left;margin-left: 20px;">#}
+    {#                    <option value="" disabled selected>VRF选择</option>#}
+    {#                </select>#}
+    {#                <br><br>#}
+    {#                <button type="submit" class="btn btn-secondary"#}
+    {#                        style="width: 30%;display: inline;float:left;margin-left: 20px;" onclick="accessVlan()"#}
+    {#                        id="submit">#}
+    {#                    Submit#}
+    {#                </button>#}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {#        <br>#}
+    {#        <span>dfafdf</span>#}
+    {#    </form>#}
+</div>
+
+</body>
+</html>
