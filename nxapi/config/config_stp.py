@@ -134,7 +134,7 @@ class config_stp():
         data = json.loads(response.text)
         return data
 
-    def config_stp_mst_instance(self, instanceid, vlanrange,priority):
+    def config_stp_mst_instance(self, instanceid, vlanrange, priority):
         payload = {
             "topSystem": {
                 "children": [
@@ -175,8 +175,6 @@ class config_stp():
             return True
         else:
             return False
-
-
 
     def config_stp_mstentity(self,
                              adminSt="1",

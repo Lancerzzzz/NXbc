@@ -17,5 +17,4 @@ urlpatterns = [
     path('queryRoute/', views.routeView.as_view(), name="queryRoute"),
     path('confStp/', views.confStp.as_view(), name="confStp"),
     path('staticRoute/', views.staticRouteView.as_view(), name="staticRoute"),
-
 ]
